@@ -1,0 +1,1142 @@
+2021/10/27 00:19:26 Controller start up complete
+2021/10/27 00:19:26 HEARTBEAT LISTENER ROUTINE LAUNCHED
+2021/10/27 00:19:26 HEARTBEAT ANALYZER ROUTINE LAUNCHED
+2021/10/27 00:20:24 1/N HEARTBEAT HANDLER ROUTINES LAUNCHED
+2021/10/27 00:20:24 MacBook-Pro.local:7777 registered with controller
+2021/10/27 00:20:24 Active nodes: 
+2021/10/27 00:20:24 -> MacBook-Pro.local:7777 <3 1 
+2021/10/27 00:20:29 <3MacBook-Pro.local:7777<3
+2021/10/27 00:20:29 Adding MacBook-Pro.local:7777 to heartbeat counter
+2021/10/27 00:20:34 <3MacBook-Pro.local:7777<3
+2021/10/27 00:20:39 <3MacBook-Pro.local:7777<3
+2021/10/27 00:20:39 MacBook-Pro.local:7777: count=2 beats=4
+2021/10/27 00:20:44 <3MacBook-Pro.local:7777<3
+2021/10/27 00:20:49 <3MacBook-Pro.local:7777<3
+2021/10/27 00:20:49 MacBook-Pro.local:7777: count=4 beats=6
+2021/10/27 00:20:54 <3MacBook-Pro.local:7777<3
+2021/10/27 00:20:59 <3MacBook-Pro.local:7777<3
+2021/10/27 00:20:59 MacBook-Pro.local:7777: count=6 beats=8
+2021/10/27 00:21:04 <3MacBook-Pro.local:7777<3
+2021/10/27 00:21:09 <3MacBook-Pro.local:7777<3
+2021/10/27 00:21:09 MacBook-Pro.local:7777: count=8 beats=10
+2021/10/27 00:21:14 <3MacBook-Pro.local:7777<3
+2021/10/27 00:21:19 <3MacBook-Pro.local:7777<3
+2021/10/27 00:21:19 MacBook-Pro.local:7777: count=10 beats=12
+2021/10/27 00:21:24 <3MacBook-Pro.local:7777<3
+2021/10/27 00:21:29 <3MacBook-Pro.local:7777<3
+2021/10/27 00:21:29 MacBook-Pro.local:7777: count=12 beats=14
+2021/10/27 00:21:34 <3MacBook-Pro.local:7777<3
+2021/10/27 00:21:39 <3MacBook-Pro.local:7777<3
+2021/10/27 00:21:39 MacBook-Pro.local:7777: count=14 beats=16
+2021/10/27 00:21:44 <3MacBook-Pro.local:7777<3
+2021/10/27 00:21:49 <3MacBook-Pro.local:7777<3
+2021/10/27 00:21:49 MacBook-Pro.local:7777: count=16 beats=18
+2021/10/27 00:21:54 <3MacBook-Pro.local:7777<3
+2021/10/27 00:21:59 <3MacBook-Pro.local:7777<3
+2021/10/27 00:21:59 MacBook-Pro.local:7777: count=18 beats=20
+2021/10/27 00:22:04 <3MacBook-Pro.local:7777<3
+2021/10/27 00:22:09 <3MacBook-Pro.local:7777<3
+2021/10/27 00:22:09 MacBook-Pro.local:7777: count=20 beats=22
+2021/10/27 00:22:14 <3MacBook-Pro.local:7777<3
+2021/10/27 00:22:19 <3MacBook-Pro.local:7777<3
+2021/10/27 00:22:19 MacBook-Pro.local:7777: count=22 beats=24
+2021/10/27 00:22:24 <3MacBook-Pro.local:7777<3
+2021/10/27 00:22:29 <3MacBook-Pro.local:7777<3
+2021/10/27 00:22:29 MacBook-Pro.local:7777: count=24 beats=26
+2021/10/27 00:22:34 <3MacBook-Pro.local:7777<3
+2021/10/27 00:22:39 <3MacBook-Pro.local:7777<3
+2021/10/27 00:22:39 MacBook-Pro.local:7777: count=26 beats=28
+2021/10/27 00:22:44 <3MacBook-Pro.local:7777<3
+2021/10/27 00:22:49 <3MacBook-Pro.local:7777<3
+2021/10/27 00:22:49 MacBook-Pro.local:7777: count=28 beats=30
+2021/10/27 00:22:54 <3MacBook-Pro.local:7777<3
+2021/10/27 00:22:59 MacBook-Pro.local:7777: count=30 beats=31
+2021/10/27 00:22:59 <3MacBook-Pro.local:7777<3
+2021/10/27 00:23:04 <3MacBook-Pro.local:7777<3
+2021/10/27 00:23:09 MacBook-Pro.local:7777: count=31 beats=33
+2021/10/27 00:23:09 <3MacBook-Pro.local:7777<3
+2021/10/27 00:23:14 <3MacBook-Pro.local:7777<3
+2021/10/27 00:23:19 MacBook-Pro.local:7777: count=33 beats=35
+2021/10/27 00:23:19 <3MacBook-Pro.local:7777<3
+2021/10/27 00:23:24 <3MacBook-Pro.local:7777<3
+2021/10/27 00:23:29 MacBook-Pro.local:7777: count=35 beats=37
+2021/10/27 00:23:29 <3MacBook-Pro.local:7777<3
+2021/10/27 00:23:34 <3MacBook-Pro.local:7777<3
+2021/10/27 00:23:39 MacBook-Pro.local:7777: count=37 beats=39
+2021/10/27 00:23:39 <3MacBook-Pro.local:7777<3
+2021/10/27 00:23:44 <3MacBook-Pro.local:7777<3
+2021/10/27 00:23:49 MacBook-Pro.local:7777: count=39 beats=41
+2021/10/27 00:23:49 <3MacBook-Pro.local:7777<3
+2021/10/27 00:23:54 <3MacBook-Pro.local:7777<3
+2021/10/27 00:23:59 MacBook-Pro.local:7777: count=41 beats=43
+2021/10/27 00:23:59 <3MacBook-Pro.local:7777<3
+2021/10/27 00:24:04 <3MacBook-Pro.local:7777<3
+2021/10/27 00:24:09 MacBook-Pro.local:7777: count=43 beats=45
+2021/10/27 00:24:09 <3MacBook-Pro.local:7777<3
+2021/10/27 00:24:14 <3MacBook-Pro.local:7777<3
+2021/10/27 00:24:19 MacBook-Pro.local:7777: count=45 beats=47
+2021/10/27 00:24:19 <3MacBook-Pro.local:7777<3
+2021/10/27 00:24:24 <3MacBook-Pro.local:7777<3
+2021/10/27 00:24:29 MacBook-Pro.local:7777: count=47 beats=49
+2021/10/27 00:24:29 <3MacBook-Pro.local:7777<3
+2021/10/27 00:24:34 <3MacBook-Pro.local:7777<3
+2021/10/27 00:24:39 MacBook-Pro.local:7777: count=49 beats=51
+2021/10/27 00:24:39 <3MacBook-Pro.local:7777<3
+2021/10/27 00:24:44 <3MacBook-Pro.local:7777<3
+2021/10/27 00:24:49 MacBook-Pro.local:7777: count=51 beats=53
+2021/10/27 00:24:49 <3MacBook-Pro.local:7777<3
+2021/10/27 00:24:54 <3MacBook-Pro.local:7777<3
+2021/10/27 00:24:59 MacBook-Pro.local:7777: count=53 beats=55
+2021/10/27 00:24:59 <3MacBook-Pro.local:7777<3
+2021/10/27 00:25:05 <3MacBook-Pro.local:7777<3
+2021/10/27 00:25:09 MacBook-Pro.local:7777: count=55 beats=57
+2021/10/27 00:25:10 <3MacBook-Pro.local:7777<3
+2021/10/27 00:25:15 <3MacBook-Pro.local:7777<3
+2021/10/27 00:25:19 MacBook-Pro.local:7777: count=57 beats=59
+2021/10/27 00:25:20 <3MacBook-Pro.local:7777<3
+2021/10/27 00:25:25 <3MacBook-Pro.local:7777<3
+2021/10/27 00:25:29 MacBook-Pro.local:7777: count=59 beats=61
+2021/10/27 00:25:30 <3MacBook-Pro.local:7777<3
+2021/10/27 00:25:35 <3MacBook-Pro.local:7777<3
+2021/10/27 00:25:39 MacBook-Pro.local:7777: count=61 beats=63
+2021/10/27 00:25:40 <3MacBook-Pro.local:7777<3
+2021/10/27 00:25:45 <3MacBook-Pro.local:7777<3
+2021/10/27 00:25:49 MacBook-Pro.local:7777: count=63 beats=65
+2021/10/27 00:25:50 <3MacBook-Pro.local:7777<3
+2021/10/27 00:25:55 <3MacBook-Pro.local:7777<3
+2021/10/27 00:25:59 MacBook-Pro.local:7777: count=65 beats=67
+2021/10/27 00:26:00 <3MacBook-Pro.local:7777<3
+2021/10/27 00:26:02 1/N HEARTBEAT HANDLER ROUTINES LAUNCHED
+2021/10/27 00:26:02 MacBook-Pro.local:7778 registered with controller
+2021/10/27 00:26:02 Active nodes: 
+2021/10/27 00:26:02 -> MacBook-Pro.local:7777 <3 68 
+2021/10/27 00:26:02 -> MacBook-Pro.local:7778 <3 1 
+2021/10/27 00:26:05 <3MacBook-Pro.local:7777<3
+2021/10/27 00:26:07 <3MacBook-Pro.local:7778<3
+2021/10/27 00:26:10 Adding MacBook-Pro.local:7778 to heartbeat counter
+2021/10/27 00:26:10 MacBook-Pro.local:7777: count=67 beats=69
+2021/10/27 00:26:10 <3MacBook-Pro.local:7777<3
+2021/10/27 00:26:12 <3MacBook-Pro.local:7778<3
+2021/10/27 00:26:15 <3MacBook-Pro.local:7777<3
+2021/10/27 00:26:17 <3MacBook-Pro.local:7778<3
+2021/10/27 00:26:20 MacBook-Pro.local:7777: count=69 beats=71
+2021/10/27 00:26:20 MacBook-Pro.local:7778: count=2 beats=4
+2021/10/27 00:26:20 <3MacBook-Pro.local:7777<3
+2021/10/27 00:26:22 <3MacBook-Pro.local:7778<3
+2021/10/27 00:26:25 <3MacBook-Pro.local:7777<3
+2021/10/27 00:26:27 <3MacBook-Pro.local:7778<3
+2021/10/27 00:26:30 MacBook-Pro.local:7777: count=71 beats=73
+2021/10/27 00:26:30 MacBook-Pro.local:7778: count=4 beats=6
+2021/10/27 00:26:30 <3MacBook-Pro.local:7777<3
+2021/10/27 00:26:32 <3MacBook-Pro.local:7778<3
+2021/10/27 00:26:35 <3MacBook-Pro.local:7777<3
+2021/10/27 00:26:37 <3MacBook-Pro.local:7778<3
+2021/10/27 00:26:40 MacBook-Pro.local:7777: count=73 beats=75
+2021/10/27 00:26:40 MacBook-Pro.local:7778: count=6 beats=8
+2021/10/27 00:26:40 <3MacBook-Pro.local:7777<3
+2021/10/27 00:26:42 <3MacBook-Pro.local:7778<3
+2021/10/27 00:26:45 <3MacBook-Pro.local:7777<3
+2021/10/27 00:26:47 <3MacBook-Pro.local:7778<3
+2021/10/27 00:26:50 MacBook-Pro.local:7777: count=75 beats=77
+2021/10/27 00:26:50 MacBook-Pro.local:7778: count=8 beats=10
+2021/10/27 00:26:50 <3MacBook-Pro.local:7777<3
+2021/10/27 00:26:52 <3MacBook-Pro.local:7778<3
+2021/10/27 00:26:55 <3MacBook-Pro.local:7777<3
+2021/10/27 00:26:57 <3MacBook-Pro.local:7778<3
+2021/10/27 00:27:00 MacBook-Pro.local:7777: count=77 beats=79
+2021/10/27 00:27:00 MacBook-Pro.local:7778: count=10 beats=12
+2021/10/27 00:27:00 <3MacBook-Pro.local:7777<3
+2021/10/27 00:27:02 <3MacBook-Pro.local:7778<3
+2021/10/27 00:27:05 <3MacBook-Pro.local:7777<3
+2021/10/27 00:27:07 <3MacBook-Pro.local:7778<3
+2021/10/27 00:27:10 MacBook-Pro.local:7777: count=79 beats=81
+2021/10/27 00:27:10 MacBook-Pro.local:7778: count=12 beats=14
+2021/10/27 00:27:10 <3MacBook-Pro.local:7777<3
+2021/10/27 00:27:12 <3MacBook-Pro.local:7778<3
+2021/10/27 00:27:15 <3MacBook-Pro.local:7777<3
+2021/10/27 00:27:17 <3MacBook-Pro.local:7778<3
+2021/10/27 00:27:20 MacBook-Pro.local:7778: count=14 beats=16
+2021/10/27 00:27:20 MacBook-Pro.local:7777: count=81 beats=83
+2021/10/27 00:27:20 <3MacBook-Pro.local:7777<3
+2021/10/27 00:27:22 <3MacBook-Pro.local:7778<3
+2021/10/27 00:27:25 <3MacBook-Pro.local:7777<3
+2021/10/27 00:27:27 <3MacBook-Pro.local:7778<3
+2021/10/27 00:27:30 MacBook-Pro.local:7777: count=83 beats=85
+2021/10/27 00:27:30 MacBook-Pro.local:7778: count=16 beats=18
+2021/10/27 00:27:30 <3MacBook-Pro.local:7777<3
+2021/10/27 00:27:32 <3MacBook-Pro.local:7778<3
+2021/10/27 00:27:35 <3MacBook-Pro.local:7777<3
+2021/10/27 00:27:37 <3MacBook-Pro.local:7778<3
+2021/10/27 00:27:40 MacBook-Pro.local:7778: count=18 beats=20
+2021/10/27 00:27:40 MacBook-Pro.local:7777: count=85 beats=87
+2021/10/27 00:27:40 <3MacBook-Pro.local:7777<3
+2021/10/27 00:27:42 <3MacBook-Pro.local:7778<3
+2021/10/27 00:27:45 1/N HEARTBEAT HANDLER ROUTINES LAUNCHED
+2021/10/27 00:27:45 MacBook-Pro.local:7779 registered with controller
+2021/10/27 00:27:45 Active nodes: 
+2021/10/27 00:27:45 -> MacBook-Pro.local:7777 <3 88 
+2021/10/27 00:27:45 -> MacBook-Pro.local:7778 <3 21 
+2021/10/27 00:27:45 -> MacBook-Pro.local:7779 <3 1 
+2021/10/27 00:27:45 <3MacBook-Pro.local:7777<3
+2021/10/27 00:27:47 <3MacBook-Pro.local:7778<3
+2021/10/27 00:27:50 MacBook-Pro.local:7777: count=87 beats=89
+2021/10/27 00:27:50 MacBook-Pro.local:7778: count=20 beats=22
+2021/10/27 00:27:50 Adding MacBook-Pro.local:7779 to heartbeat counter
+2021/10/27 00:27:50 <3MacBook-Pro.local:7779<3
+2021/10/27 00:27:50 <3MacBook-Pro.local:7777<3
+2021/10/27 00:27:52 <3MacBook-Pro.local:7778<3
+2021/10/27 00:27:55 <3MacBook-Pro.local:7779<3
+2021/10/27 00:27:55 <3MacBook-Pro.local:7777<3
+2021/10/27 00:27:57 <3MacBook-Pro.local:7778<3
+2021/10/27 00:28:00 MacBook-Pro.local:7777: count=89 beats=91
+2021/10/27 00:28:00 MacBook-Pro.local:7778: count=22 beats=24
+2021/10/27 00:28:00 MacBook-Pro.local:7779: count=1 beats=3
+2021/10/27 00:28:00 <3MacBook-Pro.local:7779<3
+2021/10/27 00:28:00 <3MacBook-Pro.local:7777<3
+2021/10/27 00:28:02 <3MacBook-Pro.local:7778<3
+2021/10/27 00:28:05 <3MacBook-Pro.local:7779<3
+2021/10/27 00:28:05 <3MacBook-Pro.local:7777<3
+2021/10/27 00:28:07 <3MacBook-Pro.local:7778<3
+2021/10/27 00:28:08 1/N HEARTBEAT HANDLER ROUTINES LAUNCHED
+2021/10/27 00:28:08 MacBook-Pro.local:7780 registered with controller
+2021/10/27 00:28:08 Active nodes: 
+2021/10/27 00:28:08 -> MacBook-Pro.local:7777 <3 93 
+2021/10/27 00:28:08 -> MacBook-Pro.local:7778 <3 26 
+2021/10/27 00:28:08 -> MacBook-Pro.local:7779 <3 5 
+2021/10/27 00:28:08 -> MacBook-Pro.local:7780 <3 1 
+2021/10/27 00:28:10 MacBook-Pro.local:7778: count=24 beats=26
+2021/10/27 00:28:10 MacBook-Pro.local:7779: count=3 beats=5
+2021/10/27 00:28:10 Adding MacBook-Pro.local:7780 to heartbeat counter
+2021/10/27 00:28:10 MacBook-Pro.local:7777: count=91 beats=93
+2021/10/27 00:28:10 <3MacBook-Pro.local:7779<3
+2021/10/27 00:28:10 <3MacBook-Pro.local:7777<3
+2021/10/27 00:28:12 <3MacBook-Pro.local:7778<3
+2021/10/27 00:28:13 <3MacBook-Pro.local:7780<3
+2021/10/27 00:28:15 <3MacBook-Pro.local:7779<3
+2021/10/27 00:28:15 <3MacBook-Pro.local:7777<3
+2021/10/27 00:28:17 <3MacBook-Pro.local:7778<3
+2021/10/27 00:28:18 <3MacBook-Pro.local:7780<3
+2021/10/27 00:28:20 MacBook-Pro.local:7779: count=5 beats=7
+2021/10/27 00:28:20 MacBook-Pro.local:7780: count=1 beats=3
+2021/10/27 00:28:20 MacBook-Pro.local:7777: count=93 beats=95
+2021/10/27 00:28:20 MacBook-Pro.local:7778: count=26 beats=28
+2021/10/27 00:28:20 <3MacBook-Pro.local:7779<3
+2021/10/27 00:28:20 <3MacBook-Pro.local:7777<3
+2021/10/27 00:28:22 <3MacBook-Pro.local:7778<3
+2021/10/27 00:28:23 <3MacBook-Pro.local:7780<3
+2021/10/27 00:28:25 <3MacBook-Pro.local:7779<3
+2021/10/27 00:28:25 <3MacBook-Pro.local:7777<3
+2021/10/27 00:28:27 <3MacBook-Pro.local:7778<3
+2021/10/27 00:28:28 <3MacBook-Pro.local:7780<3
+2021/10/27 00:28:30 MacBook-Pro.local:7777: count=95 beats=97
+2021/10/27 00:28:30 MacBook-Pro.local:7778: count=28 beats=30
+2021/10/27 00:28:30 MacBook-Pro.local:7779: count=7 beats=9
+2021/10/27 00:28:30 MacBook-Pro.local:7780: count=3 beats=5
+2021/10/27 00:28:30 <3MacBook-Pro.local:7779<3
+2021/10/27 00:28:30 <3MacBook-Pro.local:7777<3
+2021/10/27 00:28:30 1/N HEARTBEAT HANDLER ROUTINES LAUNCHED
+2021/10/27 00:28:30 MacBook-Pro.local:7781 registered with controller
+2021/10/27 00:28:30 Active nodes: 
+2021/10/27 00:28:30 -> MacBook-Pro.local:7778 <3 30 
+2021/10/27 00:28:30 -> MacBook-Pro.local:7779 <3 10 
+2021/10/27 00:28:30 -> MacBook-Pro.local:7780 <3 5 
+2021/10/27 00:28:30 -> MacBook-Pro.local:7781 <3 1 
+2021/10/27 00:28:30 -> MacBook-Pro.local:7777 <3 98 
+2021/10/27 00:28:32 <3MacBook-Pro.local:7778<3
+2021/10/27 00:28:33 <3MacBook-Pro.local:7780<3
+2021/10/27 00:28:35 <3MacBook-Pro.local:7779<3
+2021/10/27 00:28:35 <3MacBook-Pro.local:7777<3
+2021/10/27 00:28:35 <3MacBook-Pro.local:7781<3
+2021/10/27 00:28:37 <3MacBook-Pro.local:7778<3
+2021/10/27 00:28:38 <3MacBook-Pro.local:7780<3
+2021/10/27 00:28:40 MacBook-Pro.local:7778: count=30 beats=32
+2021/10/27 00:28:40 MacBook-Pro.local:7779: count=9 beats=11
+2021/10/27 00:28:40 MacBook-Pro.local:7780: count=5 beats=7
+2021/10/27 00:28:40 Adding MacBook-Pro.local:7781 to heartbeat counter
+2021/10/27 00:28:40 MacBook-Pro.local:7777: count=97 beats=99
+2021/10/27 00:28:40 <3MacBook-Pro.local:7779<3
+2021/10/27 00:28:40 <3MacBook-Pro.local:7777<3
+2021/10/27 00:28:40 <3MacBook-Pro.local:7781<3
+2021/10/27 00:28:42 <3MacBook-Pro.local:7778<3
+2021/10/27 00:28:43 <3MacBook-Pro.local:7780<3
+2021/10/27 00:28:45 <3MacBook-Pro.local:7779<3
+2021/10/27 00:28:45 <3MacBook-Pro.local:7777<3
+2021/10/27 00:28:45 <3MacBook-Pro.local:7781<3
+2021/10/27 00:28:47 <3MacBook-Pro.local:7778<3
+2021/10/27 00:28:48 <3MacBook-Pro.local:7780<3
+2021/10/27 00:28:50 MacBook-Pro.local:7777: count=99 beats=101
+2021/10/27 00:28:50 MacBook-Pro.local:7778: count=32 beats=34
+2021/10/27 00:28:50 MacBook-Pro.local:7779: count=11 beats=13
+2021/10/27 00:28:50 MacBook-Pro.local:7780: count=7 beats=9
+2021/10/27 00:28:50 MacBook-Pro.local:7781: count=2 beats=4
+2021/10/27 00:28:50 <3MacBook-Pro.local:7779<3
+2021/10/27 00:28:50 <3MacBook-Pro.local:7777<3
+2021/10/27 00:28:50 <3MacBook-Pro.local:7781<3
+2021/10/27 00:28:52 <3MacBook-Pro.local:7778<3
+2021/10/27 00:28:53 <3MacBook-Pro.local:7780<3
+2021/10/27 00:28:55 <3MacBook-Pro.local:7779<3
+2021/10/27 00:28:55 <3MacBook-Pro.local:7777<3
+2021/10/27 00:28:55 <3MacBook-Pro.local:7781<3
+2021/10/27 00:28:57 <3MacBook-Pro.local:7778<3
+2021/10/27 00:28:58 <3MacBook-Pro.local:7780<3
+2021/10/27 00:29:00 MacBook-Pro.local:7779: count=13 beats=15
+2021/10/27 00:29:00 MacBook-Pro.local:7780: count=9 beats=11
+2021/10/27 00:29:00 MacBook-Pro.local:7781: count=4 beats=6
+2021/10/27 00:29:00 MacBook-Pro.local:7777: count=101 beats=103
+2021/10/27 00:29:00 MacBook-Pro.local:7778: count=34 beats=36
+2021/10/27 00:29:00 <3MacBook-Pro.local:7779<3
+2021/10/27 00:29:00 <3MacBook-Pro.local:7777<3
+2021/10/27 00:29:00 <3MacBook-Pro.local:7781<3
+2021/10/27 00:29:02 <3MacBook-Pro.local:7778<3
+2021/10/27 00:29:03 <3MacBook-Pro.local:7780<3
+2021/10/27 00:29:05 <3MacBook-Pro.local:7779<3
+2021/10/27 00:29:05 <3MacBook-Pro.local:7777<3
+2021/10/27 00:29:05 <3MacBook-Pro.local:7781<3
+2021/10/27 00:29:07 <3MacBook-Pro.local:7778<3
+2021/10/27 00:29:08 <3MacBook-Pro.local:7780<3
+2021/10/27 00:29:10 MacBook-Pro.local:7780: count=11 beats=13
+2021/10/27 00:29:10 MacBook-Pro.local:7781: count=6 beats=8
+2021/10/27 00:29:10 MacBook-Pro.local:7777: count=103 beats=105
+2021/10/27 00:29:10 MacBook-Pro.local:7778: count=36 beats=38
+2021/10/27 00:29:10 MacBook-Pro.local:7779: count=15 beats=17
+2021/10/27 00:29:10 <3MacBook-Pro.local:7779<3
+2021/10/27 00:29:10 <3MacBook-Pro.local:7777<3
+2021/10/27 00:29:10 <3MacBook-Pro.local:7781<3
+2021/10/27 00:29:12 <3MacBook-Pro.local:7778<3
+2021/10/27 00:29:13 <3MacBook-Pro.local:7780<3
+2021/10/27 00:29:13 1/N HEARTBEAT HANDLER ROUTINES LAUNCHED
+2021/10/27 00:29:13 MacBook-Pro.local:7782 registered with controller
+2021/10/27 00:29:13 Active nodes: 
+2021/10/27 00:29:13 -> MacBook-Pro.local:7778 <3 39 
+2021/10/27 00:29:13 -> MacBook-Pro.local:7779 <3 18 
+2021/10/27 00:29:13 -> MacBook-Pro.local:7780 <3 14 
+2021/10/27 00:29:13 -> MacBook-Pro.local:7781 <3 9 
+2021/10/27 00:29:13 -> MacBook-Pro.local:7782 <3 1 
+2021/10/27 00:29:13 -> MacBook-Pro.local:7777 <3 106 
+2021/10/27 00:29:15 <3MacBook-Pro.local:7779<3
+2021/10/27 00:29:15 <3MacBook-Pro.local:7777<3
+2021/10/27 00:29:15 <3MacBook-Pro.local:7781<3
+2021/10/27 00:29:17 <3MacBook-Pro.local:7778<3
+2021/10/27 00:29:18 <3MacBook-Pro.local:7780<3
+2021/10/27 00:29:18 <3MacBook-Pro.local:7782<3
+2021/10/27 00:29:20 MacBook-Pro.local:7777: count=105 beats=107
+2021/10/27 00:29:20 MacBook-Pro.local:7778: count=38 beats=40
+2021/10/27 00:29:20 MacBook-Pro.local:7779: count=17 beats=19
+2021/10/27 00:29:20 MacBook-Pro.local:7780: count=13 beats=15
+2021/10/27 00:29:20 MacBook-Pro.local:7781: count=8 beats=10
+2021/10/27 00:29:20 Adding MacBook-Pro.local:7782 to heartbeat counter
+2021/10/27 00:29:20 <3MacBook-Pro.local:7779<3
+2021/10/27 00:29:20 <3MacBook-Pro.local:7777<3
+2021/10/27 00:29:20 <3MacBook-Pro.local:7781<3
+2021/10/27 00:29:22 <3MacBook-Pro.local:7778<3
+2021/10/27 00:29:23 <3MacBook-Pro.local:7780<3
+2021/10/27 00:29:23 <3MacBook-Pro.local:7782<3
+2021/10/27 00:29:25 <3MacBook-Pro.local:7779<3
+2021/10/27 00:29:25 <3MacBook-Pro.local:7777<3
+2021/10/27 00:29:25 <3MacBook-Pro.local:7781<3
+2021/10/27 00:29:27 <3MacBook-Pro.local:7778<3
+2021/10/27 00:29:28 <3MacBook-Pro.local:7780<3
+2021/10/27 00:29:28 <3MacBook-Pro.local:7782<3
+2021/10/27 00:29:30 MacBook-Pro.local:7780: count=15 beats=17
+2021/10/27 00:29:30 MacBook-Pro.local:7781: count=10 beats=12
+2021/10/27 00:29:30 MacBook-Pro.local:7782: count=2 beats=4
+2021/10/27 00:29:30 MacBook-Pro.local:7777: count=107 beats=109
+2021/10/27 00:29:30 MacBook-Pro.local:7778: count=40 beats=42
+2021/10/27 00:29:30 MacBook-Pro.local:7779: count=19 beats=21
+2021/10/27 00:29:30 <3MacBook-Pro.local:7779<3
+2021/10/27 00:29:30 <3MacBook-Pro.local:7777<3
+2021/10/27 00:29:30 <3MacBook-Pro.local:7781<3
+2021/10/27 00:29:32 1/N HEARTBEAT HANDLER ROUTINES LAUNCHED
+2021/10/27 00:29:32 MacBook-Pro.local:7783 registered with controller
+2021/10/27 00:29:32 Active nodes: 
+2021/10/27 00:29:32 -> MacBook-Pro.local:7777 <3 110 
+2021/10/27 00:29:32 -> MacBook-Pro.local:7778 <3 42 
+2021/10/27 00:29:32 -> MacBook-Pro.local:7779 <3 22 
+2021/10/27 00:29:32 -> MacBook-Pro.local:7780 <3 17 
+2021/10/27 00:29:32 -> MacBook-Pro.local:7781 <3 13 
+2021/10/27 00:29:32 -> MacBook-Pro.local:7782 <3 4 
+2021/10/27 00:29:32 -> MacBook-Pro.local:7783 <3 1 
+2021/10/27 00:29:32 <3MacBook-Pro.local:7778<3
+2021/10/27 00:29:33 <3MacBook-Pro.local:7780<3
+2021/10/27 00:29:33 <3MacBook-Pro.local:7782<3
+2021/10/27 00:29:35 <3MacBook-Pro.local:7779<3
+2021/10/27 00:29:35 <3MacBook-Pro.local:7777<3
+2021/10/27 00:29:35 <3MacBook-Pro.local:7781<3
+2021/10/27 00:29:37 <3MacBook-Pro.local:7783<3
+2021/10/27 00:29:37 <3MacBook-Pro.local:7778<3
+2021/10/27 00:29:38 <3MacBook-Pro.local:7780<3
+2021/10/27 00:29:38 <3MacBook-Pro.local:7782<3
+2021/10/27 00:29:40 MacBook-Pro.local:7782: count=4 beats=6
+2021/10/27 00:29:40 Adding MacBook-Pro.local:7783 to heartbeat counter
+2021/10/27 00:29:40 MacBook-Pro.local:7777: count=109 beats=111
+2021/10/27 00:29:40 MacBook-Pro.local:7778: count=42 beats=44
+2021/10/27 00:29:40 MacBook-Pro.local:7779: count=21 beats=23
+2021/10/27 00:29:40 MacBook-Pro.local:7780: count=17 beats=19
+2021/10/27 00:29:40 MacBook-Pro.local:7781: count=12 beats=14
+2021/10/27 00:29:40 <3MacBook-Pro.local:7779<3
+2021/10/27 00:29:40 <3MacBook-Pro.local:7777<3
+2021/10/27 00:29:40 <3MacBook-Pro.local:7781<3
+2021/10/27 00:29:42 <3MacBook-Pro.local:7783<3
+2021/10/27 00:29:42 <3MacBook-Pro.local:7778<3
+2021/10/27 00:29:43 <3MacBook-Pro.local:7780<3
+2021/10/27 00:29:43 <3MacBook-Pro.local:7782<3
+2021/10/27 00:29:45 <3MacBook-Pro.local:7779<3
+2021/10/27 00:29:45 <3MacBook-Pro.local:7777<3
+2021/10/27 00:29:45 <3MacBook-Pro.local:7781<3
+2021/10/27 00:29:47 <3MacBook-Pro.local:7783<3
+2021/10/27 00:29:47 <3MacBook-Pro.local:7778<3
+2021/10/27 00:29:48 <3MacBook-Pro.local:7780<3
+2021/10/27 00:29:48 <3MacBook-Pro.local:7782<3
+2021/10/27 00:29:50 MacBook-Pro.local:7781: count=14 beats=16
+2021/10/27 00:29:50 MacBook-Pro.local:7782: count=6 beats=8
+2021/10/27 00:29:50 MacBook-Pro.local:7783: count=2 beats=4
+2021/10/27 00:29:50 MacBook-Pro.local:7777: count=111 beats=113
+2021/10/27 00:29:50 MacBook-Pro.local:7778: count=44 beats=46
+2021/10/27 00:29:50 MacBook-Pro.local:7779: count=23 beats=25
+2021/10/27 00:29:50 MacBook-Pro.local:7780: count=19 beats=21
+2021/10/27 00:29:50 <3MacBook-Pro.local:7779<3
+2021/10/27 00:29:50 <3MacBook-Pro.local:7777<3
+2021/10/27 00:29:50 <3MacBook-Pro.local:7781<3
+2021/10/27 00:29:52 <3MacBook-Pro.local:7783<3
+2021/10/27 00:29:52 <3MacBook-Pro.local:7778<3
+2021/10/27 00:29:53 <3MacBook-Pro.local:7780<3
+2021/10/27 00:29:53 <3MacBook-Pro.local:7782<3
+2021/10/27 00:29:55 <3MacBook-Pro.local:7779<3
+2021/10/27 00:29:55 <3MacBook-Pro.local:7777<3
+2021/10/27 00:29:55 <3MacBook-Pro.local:7781<3
+2021/10/27 00:29:57 <3MacBook-Pro.local:7783<3
+2021/10/27 00:29:57 <3MacBook-Pro.local:7778<3
+2021/10/27 00:29:58 <3MacBook-Pro.local:7780<3
+2021/10/27 00:29:58 <3MacBook-Pro.local:7782<3
+2021/10/27 00:30:00 MacBook-Pro.local:7781: count=16 beats=18
+2021/10/27 00:30:00 MacBook-Pro.local:7782: count=8 beats=10
+2021/10/27 00:30:00 MacBook-Pro.local:7783: count=4 beats=6
+2021/10/27 00:30:00 MacBook-Pro.local:7777: count=113 beats=115
+2021/10/27 00:30:00 MacBook-Pro.local:7778: count=46 beats=48
+2021/10/27 00:30:00 MacBook-Pro.local:7779: count=25 beats=27
+2021/10/27 00:30:00 MacBook-Pro.local:7780: count=21 beats=23
+2021/10/27 00:30:00 <3MacBook-Pro.local:7779<3
+2021/10/27 00:30:00 <3MacBook-Pro.local:7777<3
+2021/10/27 00:30:00 <3MacBook-Pro.local:7781<3
+2021/10/27 00:30:00 1/N HEARTBEAT HANDLER ROUTINES LAUNCHED
+2021/10/27 00:30:00 MacBook-Pro.local:7784 registered with controller
+2021/10/27 00:30:00 Active nodes: 
+2021/10/27 00:30:00 -> MacBook-Pro.local:7784 <3 1 
+2021/10/27 00:30:00 -> MacBook-Pro.local:7777 <3 116 
+2021/10/27 00:30:00 -> MacBook-Pro.local:7778 <3 48 
+2021/10/27 00:30:00 -> MacBook-Pro.local:7779 <3 28 
+2021/10/27 00:30:00 -> MacBook-Pro.local:7780 <3 23 
+2021/10/27 00:30:00 -> MacBook-Pro.local:7781 <3 19 
+2021/10/27 00:30:00 -> MacBook-Pro.local:7782 <3 10 
+2021/10/27 00:30:00 -> MacBook-Pro.local:7783 <3 6 
+2021/10/27 00:30:02 <3MacBook-Pro.local:7783<3
+2021/10/27 00:30:02 <3MacBook-Pro.local:7778<3
+2021/10/27 00:30:03 <3MacBook-Pro.local:7780<3
+2021/10/27 00:30:03 <3MacBook-Pro.local:7782<3
+2021/10/27 00:30:05 <3MacBook-Pro.local:7779<3
+2021/10/27 00:30:05 <3MacBook-Pro.local:7777<3
+2021/10/27 00:30:05 <3MacBook-Pro.local:7781<3
+2021/10/27 00:30:05 <3MacBook-Pro.local:7784<3
+2021/10/27 00:30:07 <3MacBook-Pro.local:7783<3
+2021/10/27 00:30:07 <3MacBook-Pro.local:7778<3
+2021/10/27 00:30:08 <3MacBook-Pro.local:7780<3
+2021/10/27 00:30:08 <3MacBook-Pro.local:7782<3
+2021/10/27 00:30:10 MacBook-Pro.local:7779: count=27 beats=29
+2021/10/27 00:30:10 MacBook-Pro.local:7780: count=23 beats=25
+2021/10/27 00:30:10 MacBook-Pro.local:7781: count=18 beats=20
+2021/10/27 00:30:10 MacBook-Pro.local:7782: count=10 beats=12
+2021/10/27 00:30:10 MacBook-Pro.local:7783: count=6 beats=8
+2021/10/27 00:30:10 Adding MacBook-Pro.local:7784 to heartbeat counter
+2021/10/27 00:30:10 MacBook-Pro.local:7777: count=115 beats=117
+2021/10/27 00:30:10 MacBook-Pro.local:7778: count=48 beats=50
+2021/10/27 00:30:10 <3MacBook-Pro.local:7779<3
+2021/10/27 00:30:10 <3MacBook-Pro.local:7777<3
+2021/10/27 00:30:10 <3MacBook-Pro.local:7781<3
+2021/10/27 00:30:10 <3MacBook-Pro.local:7784<3
+2021/10/27 00:30:12 <3MacBook-Pro.local:7783<3
+2021/10/27 00:30:12 <3MacBook-Pro.local:7778<3
+2021/10/27 00:30:13 <3MacBook-Pro.local:7780<3
+2021/10/27 00:30:13 <3MacBook-Pro.local:7782<3
+2021/10/27 00:30:15 <3MacBook-Pro.local:7779<3
+2021/10/27 00:30:15 <3MacBook-Pro.local:7777<3
+2021/10/27 00:30:15 <3MacBook-Pro.local:7781<3
+2021/10/27 00:30:15 <3MacBook-Pro.local:7784<3
+2021/10/27 00:30:17 <3MacBook-Pro.local:7783<3
+2021/10/27 00:30:17 <3MacBook-Pro.local:7778<3
+2021/10/27 00:30:18 <3MacBook-Pro.local:7780<3
+2021/10/27 00:30:18 <3MacBook-Pro.local:7782<3
+2021/10/27 00:30:19 1/N HEARTBEAT HANDLER ROUTINES LAUNCHED
+2021/10/27 00:30:19 MacBook-Pro.local:7785 registered with controller
+2021/10/27 00:30:19 Active nodes: 
+2021/10/27 00:30:19 -> MacBook-Pro.local:7782 <3 14 
+2021/10/27 00:30:19 -> MacBook-Pro.local:7783 <3 10 
+2021/10/27 00:30:19 -> MacBook-Pro.local:7784 <3 4 
+2021/10/27 00:30:19 -> MacBook-Pro.local:7777 <3 119 
+2021/10/27 00:30:19 -> MacBook-Pro.local:7778 <3 52 
+2021/10/27 00:30:19 -> MacBook-Pro.local:7779 <3 31 
+2021/10/27 00:30:19 -> MacBook-Pro.local:7780 <3 27 
+2021/10/27 00:30:19 -> MacBook-Pro.local:7781 <3 22 
+2021/10/27 00:30:19 -> MacBook-Pro.local:7785 <3 1 
+2021/10/27 00:30:20 MacBook-Pro.local:7784: count=2 beats=4
+2021/10/27 00:30:20 MacBook-Pro.local:7782: count=12 beats=14
+2021/10/27 00:30:20 MacBook-Pro.local:7783: count=8 beats=10
+2021/10/27 00:30:20 MacBook-Pro.local:7779: count=29 beats=31
+2021/10/27 00:30:20 MacBook-Pro.local:7780: count=25 beats=27
+2021/10/27 00:30:20 MacBook-Pro.local:7781: count=20 beats=22
+2021/10/27 00:30:20 Adding MacBook-Pro.local:7785 to heartbeat counter
+2021/10/27 00:30:20 MacBook-Pro.local:7777: count=117 beats=119
+2021/10/27 00:30:20 MacBook-Pro.local:7778: count=50 beats=52
+2021/10/27 00:30:20 <3MacBook-Pro.local:7779<3
+2021/10/27 00:30:20 <3MacBook-Pro.local:7777<3
+2021/10/27 00:30:20 <3MacBook-Pro.local:7781<3
+2021/10/27 00:30:20 <3MacBook-Pro.local:7784<3
+2021/10/27 00:30:22 <3MacBook-Pro.local:7783<3
+2021/10/27 00:30:22 <3MacBook-Pro.local:7778<3
+2021/10/27 00:30:23 <3MacBook-Pro.local:7780<3
+2021/10/27 00:30:23 <3MacBook-Pro.local:7782<3
+2021/10/27 00:30:24 <3MacBook-Pro.local:7785<3
+2021/10/27 00:30:25 <3MacBook-Pro.local:7779<3
+2021/10/27 00:30:25 <3MacBook-Pro.local:7777<3
+2021/10/27 00:30:25 <3MacBook-Pro.local:7781<3
+2021/10/27 00:30:25 <3MacBook-Pro.local:7784<3
+2021/10/27 00:30:27 <3MacBook-Pro.local:7783<3
+2021/10/27 00:30:27 <3MacBook-Pro.local:7778<3
+2021/10/27 00:30:28 <3MacBook-Pro.local:7780<3
+2021/10/27 00:30:28 <3MacBook-Pro.local:7782<3
+2021/10/27 00:30:29 <3MacBook-Pro.local:7785<3
+2021/10/27 00:30:30 MacBook-Pro.local:7782: count=14 beats=16
+2021/10/27 00:30:30 MacBook-Pro.local:7783: count=10 beats=12
+2021/10/27 00:30:30 MacBook-Pro.local:7784: count=4 beats=6
+2021/10/27 00:30:30 MacBook-Pro.local:7777: count=119 beats=121
+2021/10/27 00:30:30 MacBook-Pro.local:7778: count=52 beats=54
+2021/10/27 00:30:30 MacBook-Pro.local:7779: count=31 beats=33
+2021/10/27 00:30:30 MacBook-Pro.local:7780: count=27 beats=29
+2021/10/27 00:30:30 MacBook-Pro.local:7781: count=22 beats=24
+2021/10/27 00:30:30 MacBook-Pro.local:7785: count=1 beats=3
+2021/10/27 00:30:30 <3MacBook-Pro.local:7779<3
+2021/10/27 00:30:30 <3MacBook-Pro.local:7777<3
+2021/10/27 00:30:30 <3MacBook-Pro.local:7781<3
+2021/10/27 00:30:30 <3MacBook-Pro.local:7784<3
+2021/10/27 00:30:32 <3MacBook-Pro.local:7783<3
+2021/10/27 00:30:32 <3MacBook-Pro.local:7778<3
+2021/10/27 00:30:33 <3MacBook-Pro.local:7780<3
+2021/10/27 00:30:33 <3MacBook-Pro.local:7782<3
+2021/10/27 00:30:34 <3MacBook-Pro.local:7785<3
+2021/10/27 00:30:35 <3MacBook-Pro.local:7779<3
+2021/10/27 00:30:35 <3MacBook-Pro.local:7777<3
+2021/10/27 00:30:35 <3MacBook-Pro.local:7781<3
+2021/10/27 00:30:35 <3MacBook-Pro.local:7784<3
+2021/10/27 00:30:37 <3MacBook-Pro.local:7783<3
+2021/10/27 00:30:37 <3MacBook-Pro.local:7778<3
+2021/10/27 00:30:38 <3MacBook-Pro.local:7780<3
+2021/10/27 00:30:38 <3MacBook-Pro.local:7782<3
+2021/10/27 00:30:39 <3MacBook-Pro.local:7785<3
+2021/10/27 00:30:39 1/N HEARTBEAT HANDLER ROUTINES LAUNCHED
+2021/10/27 00:30:39 MacBook-Pro.local:7786 registered with controller
+2021/10/27 00:30:39 Active nodes: 
+2021/10/27 00:30:39 -> MacBook-Pro.local:7782 <3 18 
+2021/10/27 00:30:39 -> MacBook-Pro.local:7783 <3 14 
+2021/10/27 00:30:39 -> MacBook-Pro.local:7784 <3 8 
+2021/10/27 00:30:39 -> MacBook-Pro.local:7786 <3 1 
+2021/10/27 00:30:39 -> MacBook-Pro.local:7777 <3 123 
+2021/10/27 00:30:39 -> MacBook-Pro.local:7778 <3 56 
+2021/10/27 00:30:39 -> MacBook-Pro.local:7779 <3 35 
+2021/10/27 00:30:39 -> MacBook-Pro.local:7780 <3 31 
+2021/10/27 00:30:39 -> MacBook-Pro.local:7781 <3 26 
+2021/10/27 00:30:39 -> MacBook-Pro.local:7785 <3 5 
+2021/10/27 00:30:40 Adding MacBook-Pro.local:7786 to heartbeat counter
+2021/10/27 00:30:40 MacBook-Pro.local:7782: count=16 beats=18
+2021/10/27 00:30:40 MacBook-Pro.local:7783: count=12 beats=14
+2021/10/27 00:30:40 MacBook-Pro.local:7784: count=6 beats=8
+2021/10/27 00:30:40 MacBook-Pro.local:7780: count=29 beats=31
+2021/10/27 00:30:40 MacBook-Pro.local:7781: count=24 beats=26
+2021/10/27 00:30:40 MacBook-Pro.local:7785: count=3 beats=5
+2021/10/27 00:30:40 MacBook-Pro.local:7777: count=121 beats=123
+2021/10/27 00:30:40 MacBook-Pro.local:7778: count=54 beats=56
+2021/10/27 00:30:40 MacBook-Pro.local:7779: count=33 beats=35
+2021/10/27 00:30:40 <3MacBook-Pro.local:7779<3
+2021/10/27 00:30:40 <3MacBook-Pro.local:7777<3
+2021/10/27 00:30:40 <3MacBook-Pro.local:7781<3
+2021/10/27 00:30:40 <3MacBook-Pro.local:7784<3
+2021/10/27 00:30:42 <3MacBook-Pro.local:7783<3
+2021/10/27 00:30:42 <3MacBook-Pro.local:7778<3
+2021/10/27 00:30:43 <3MacBook-Pro.local:7780<3
+2021/10/27 00:30:43 <3MacBook-Pro.local:7782<3
+2021/10/27 00:30:44 <3MacBook-Pro.local:7785<3
+2021/10/27 00:30:44 <3MacBook-Pro.local:7786<3
+2021/10/27 00:30:45 <3MacBook-Pro.local:7779<3
+2021/10/27 00:30:45 <3MacBook-Pro.local:7777<3
+2021/10/27 00:30:45 <3MacBook-Pro.local:7781<3
+2021/10/27 00:30:45 <3MacBook-Pro.local:7784<3
+2021/10/27 00:30:47 <3MacBook-Pro.local:7783<3
+2021/10/27 00:30:47 <3MacBook-Pro.local:7778<3
+2021/10/27 00:30:48 <3MacBook-Pro.local:7780<3
+2021/10/27 00:30:48 <3MacBook-Pro.local:7782<3
+2021/10/27 00:30:49 <3MacBook-Pro.local:7785<3
+2021/10/27 00:30:49 <3MacBook-Pro.local:7786<3
+2021/10/27 00:30:50 MacBook-Pro.local:7777: count=123 beats=125
+2021/10/27 00:30:50 MacBook-Pro.local:7778: count=56 beats=58
+2021/10/27 00:30:50 MacBook-Pro.local:7779: count=35 beats=37
+2021/10/27 00:30:50 MacBook-Pro.local:7780: count=31 beats=33
+2021/10/27 00:30:50 MacBook-Pro.local:7781: count=26 beats=28
+2021/10/27 00:30:50 MacBook-Pro.local:7785: count=5 beats=7
+2021/10/27 00:30:50 MacBook-Pro.local:7782: count=18 beats=20
+2021/10/27 00:30:50 MacBook-Pro.local:7783: count=14 beats=16
+2021/10/27 00:30:50 MacBook-Pro.local:7784: count=8 beats=10
+2021/10/27 00:30:50 MacBook-Pro.local:7786: count=1 beats=3
+2021/10/27 00:30:50 <3MacBook-Pro.local:7779<3
+2021/10/27 00:30:50 <3MacBook-Pro.local:7777<3
+2021/10/27 00:30:50 <3MacBook-Pro.local:7781<3
+2021/10/27 00:30:50 <3MacBook-Pro.local:7784<3
+2021/10/27 00:30:52 <3MacBook-Pro.local:7783<3
+2021/10/27 00:30:52 <3MacBook-Pro.local:7778<3
+2021/10/27 00:30:53 <3MacBook-Pro.local:7780<3
+2021/10/27 00:30:53 <3MacBook-Pro.local:7782<3
+2021/10/27 00:30:54 <3MacBook-Pro.local:7785<3
+2021/10/27 00:30:54 <3MacBook-Pro.local:7786<3
+2021/10/27 00:30:55 <3MacBook-Pro.local:7779<3
+2021/10/27 00:30:55 <3MacBook-Pro.local:7777<3
+2021/10/27 00:30:55 <3MacBook-Pro.local:7781<3
+2021/10/27 00:30:55 <3MacBook-Pro.local:7784<3
+2021/10/27 00:30:57 <3MacBook-Pro.local:7783<3
+2021/10/27 00:30:57 <3MacBook-Pro.local:7778<3
+2021/10/27 00:30:58 <3MacBook-Pro.local:7780<3
+2021/10/27 00:30:58 <3MacBook-Pro.local:7782<3
+2021/10/27 00:30:59 <3MacBook-Pro.local:7785<3
+2021/10/27 00:30:59 <3MacBook-Pro.local:7786<3
+2021/10/27 00:31:00 MacBook-Pro.local:7785: count=7 beats=9
+2021/10/27 00:31:00 MacBook-Pro.local:7777: count=125 beats=127
+2021/10/27 00:31:00 MacBook-Pro.local:7778: count=58 beats=60
+2021/10/27 00:31:00 MacBook-Pro.local:7779: count=37 beats=39
+2021/10/27 00:31:00 MacBook-Pro.local:7780: count=33 beats=35
+2021/10/27 00:31:00 MacBook-Pro.local:7781: count=28 beats=30
+2021/10/27 00:31:00 MacBook-Pro.local:7782: count=20 beats=22
+2021/10/27 00:31:00 MacBook-Pro.local:7783: count=16 beats=18
+2021/10/27 00:31:00 MacBook-Pro.local:7784: count=10 beats=12
+2021/10/27 00:31:00 MacBook-Pro.local:7786: count=3 beats=5
+2021/10/27 00:31:00 <3MacBook-Pro.local:7779<3
+2021/10/27 00:31:00 <3MacBook-Pro.local:7777<3
+2021/10/27 00:31:00 <3MacBook-Pro.local:7781<3
+2021/10/27 00:31:00 <3MacBook-Pro.local:7784<3
+2021/10/27 00:31:02 <3MacBook-Pro.local:7783<3
+2021/10/27 00:31:02 <3MacBook-Pro.local:7778<3
+2021/10/27 00:31:03 <3MacBook-Pro.local:7780<3
+2021/10/27 00:31:03 <3MacBook-Pro.local:7782<3
+2021/10/27 00:31:04 <3MacBook-Pro.local:7785<3
+2021/10/27 00:31:04 <3MacBook-Pro.local:7786<3
+2021/10/27 00:31:05 <3MacBook-Pro.local:7779<3
+2021/10/27 00:31:05 <3MacBook-Pro.local:7777<3
+2021/10/27 00:31:05 <3MacBook-Pro.local:7781<3
+2021/10/27 00:31:05 <3MacBook-Pro.local:7784<3
+2021/10/27 00:31:07 <3MacBook-Pro.local:7783<3
+2021/10/27 00:31:07 <3MacBook-Pro.local:7778<3
+2021/10/27 00:31:08 <3MacBook-Pro.local:7780<3
+2021/10/27 00:31:08 <3MacBook-Pro.local:7782<3
+2021/10/27 00:31:09 <3MacBook-Pro.local:7785<3
+2021/10/27 00:31:09 <3MacBook-Pro.local:7786<3
+2021/10/27 00:31:10 MacBook-Pro.local:7786: count=5 beats=7
+2021/10/27 00:31:10 MacBook-Pro.local:7782: count=22 beats=24
+2021/10/27 00:31:10 MacBook-Pro.local:7783: count=18 beats=20
+2021/10/27 00:31:10 MacBook-Pro.local:7784: count=12 beats=14
+2021/10/27 00:31:10 MacBook-Pro.local:7780: count=35 beats=37
+2021/10/27 00:31:10 MacBook-Pro.local:7781: count=30 beats=32
+2021/10/27 00:31:10 MacBook-Pro.local:7785: count=9 beats=11
+2021/10/27 00:31:10 MacBook-Pro.local:7777: count=127 beats=129
+2021/10/27 00:31:10 MacBook-Pro.local:7778: count=60 beats=62
+2021/10/27 00:31:10 MacBook-Pro.local:7779: count=39 beats=41
+2021/10/27 00:31:10 <3MacBook-Pro.local:7779<3
+2021/10/27 00:31:10 <3MacBook-Pro.local:7777<3
+2021/10/27 00:31:10 <3MacBook-Pro.local:7781<3
+2021/10/27 00:31:10 <3MacBook-Pro.local:7784<3
+2021/10/27 00:31:12 <3MacBook-Pro.local:7783<3
+2021/10/27 00:31:12 <3MacBook-Pro.local:7778<3
+2021/10/27 00:31:13 <3MacBook-Pro.local:7780<3
+2021/10/27 00:31:13 <3MacBook-Pro.local:7782<3
+2021/10/27 00:31:14 <3MacBook-Pro.local:7785<3
+2021/10/27 00:31:14 <3MacBook-Pro.local:7786<3
+2021/10/27 00:31:15 <3MacBook-Pro.local:7779<3
+2021/10/27 00:31:15 <3MacBook-Pro.local:7777<3
+2021/10/27 00:31:15 <3MacBook-Pro.local:7781<3
+2021/10/27 00:31:15 <3MacBook-Pro.local:7784<3
+2021/10/27 00:31:17 <3MacBook-Pro.local:7783<3
+2021/10/27 00:31:17 <3MacBook-Pro.local:7778<3
+2021/10/27 00:31:18 <3MacBook-Pro.local:7780<3
+2021/10/27 00:31:18 <3MacBook-Pro.local:7782<3
+2021/10/27 00:31:19 <3MacBook-Pro.local:7785<3
+2021/10/27 00:31:19 <3MacBook-Pro.local:7786<3
+2021/10/27 00:31:20 MacBook-Pro.local:7777: count=129 beats=131
+2021/10/27 00:31:20 MacBook-Pro.local:7778: count=62 beats=64
+2021/10/27 00:31:20 MacBook-Pro.local:7779: count=41 beats=43
+2021/10/27 00:31:20 MacBook-Pro.local:7780: count=37 beats=39
+2021/10/27 00:31:20 MacBook-Pro.local:7781: count=32 beats=34
+2021/10/27 00:31:20 MacBook-Pro.local:7785: count=11 beats=13
+2021/10/27 00:31:20 MacBook-Pro.local:7782: count=24 beats=26
+2021/10/27 00:31:20 MacBook-Pro.local:7783: count=20 beats=22
+2021/10/27 00:31:20 MacBook-Pro.local:7784: count=14 beats=16
+2021/10/27 00:31:20 MacBook-Pro.local:7786: count=7 beats=9
+2021/10/27 00:31:20 <3MacBook-Pro.local:7779<3
+2021/10/27 00:31:20 <3MacBook-Pro.local:7777<3
+2021/10/27 00:31:20 <3MacBook-Pro.local:7781<3
+2021/10/27 00:31:20 <3MacBook-Pro.local:7784<3
+2021/10/27 00:31:22 <3MacBook-Pro.local:7783<3
+2021/10/27 00:31:22 <3MacBook-Pro.local:7778<3
+2021/10/27 00:31:23 <3MacBook-Pro.local:7780<3
+2021/10/27 00:31:23 <3MacBook-Pro.local:7782<3
+2021/10/27 00:31:24 <3MacBook-Pro.local:7785<3
+2021/10/27 00:31:24 <3MacBook-Pro.local:7786<3
+2021/10/27 00:31:25 <3MacBook-Pro.local:7779<3
+2021/10/27 00:31:25 <3MacBook-Pro.local:7777<3
+2021/10/27 00:31:25 <3MacBook-Pro.local:7781<3
+2021/10/27 00:31:25 <3MacBook-Pro.local:7784<3
+2021/10/27 00:31:27 <3MacBook-Pro.local:7783<3
+2021/10/27 00:31:27 <3MacBook-Pro.local:7778<3
+2021/10/27 00:31:28 <3MacBook-Pro.local:7780<3
+2021/10/27 00:31:28 <3MacBook-Pro.local:7782<3
+2021/10/27 00:31:29 <3MacBook-Pro.local:7785<3
+2021/10/27 00:31:29 <3MacBook-Pro.local:7786<3
+2021/10/27 00:31:30 MacBook-Pro.local:7784: count=16 beats=18
+2021/10/27 00:31:30 MacBook-Pro.local:7786: count=9 beats=11
+2021/10/27 00:31:30 MacBook-Pro.local:7782: count=26 beats=28
+2021/10/27 00:31:30 MacBook-Pro.local:7783: count=22 beats=24
+2021/10/27 00:31:30 MacBook-Pro.local:7779: count=43 beats=45
+2021/10/27 00:31:30 MacBook-Pro.local:7780: count=39 beats=41
+2021/10/27 00:31:30 MacBook-Pro.local:7781: count=34 beats=36
+2021/10/27 00:31:30 MacBook-Pro.local:7785: count=13 beats=15
+2021/10/27 00:31:30 MacBook-Pro.local:7777: count=131 beats=133
+2021/10/27 00:31:30 MacBook-Pro.local:7778: count=64 beats=66
+2021/10/27 00:31:30 <3MacBook-Pro.local:7779<3
+2021/10/27 00:31:30 <3MacBook-Pro.local:7777<3
+2021/10/27 00:31:30 <3MacBook-Pro.local:7781<3
+2021/10/27 00:31:30 <3MacBook-Pro.local:7784<3
+2021/10/27 00:31:32 <3MacBook-Pro.local:7783<3
+2021/10/27 00:31:32 <3MacBook-Pro.local:7778<3
+2021/10/27 00:31:33 <3MacBook-Pro.local:7780<3
+2021/10/27 00:31:33 <3MacBook-Pro.local:7782<3
+2021/10/27 00:31:34 <3MacBook-Pro.local:7785<3
+2021/10/27 00:31:34 <3MacBook-Pro.local:7786<3
+2021/10/27 00:31:35 <3MacBook-Pro.local:7779<3
+2021/10/27 00:31:35 <3MacBook-Pro.local:7777<3
+2021/10/27 00:31:35 <3MacBook-Pro.local:7781<3
+2021/10/27 00:31:35 <3MacBook-Pro.local:7784<3
+2021/10/27 00:31:37 <3MacBook-Pro.local:7783<3
+2021/10/27 00:31:37 <3MacBook-Pro.local:7778<3
+2021/10/27 00:31:38 <3MacBook-Pro.local:7780<3
+2021/10/27 00:31:38 <3MacBook-Pro.local:7782<3
+2021/10/27 00:31:39 <3MacBook-Pro.local:7785<3
+2021/10/27 00:31:39 <3MacBook-Pro.local:7786<3
+2021/10/27 00:31:40 MacBook-Pro.local:7778: count=66 beats=68
+2021/10/27 00:31:40 MacBook-Pro.local:7779: count=45 beats=47
+2021/10/27 00:31:40 MacBook-Pro.local:7780: count=41 beats=43
+2021/10/27 00:31:40 MacBook-Pro.local:7781: count=36 beats=38
+2021/10/27 00:31:40 MacBook-Pro.local:7785: count=15 beats=17
+2021/10/27 00:31:40 MacBook-Pro.local:7777: count=133 beats=135
+2021/10/27 00:31:40 MacBook-Pro.local:7783: count=24 beats=26
+2021/10/27 00:31:40 MacBook-Pro.local:7784: count=18 beats=20
+2021/10/27 00:31:40 MacBook-Pro.local:7786: count=11 beats=13
+2021/10/27 00:31:40 MacBook-Pro.local:7782: count=28 beats=30
+2021/10/27 00:31:40 <3MacBook-Pro.local:7779<3
+2021/10/27 00:31:40 <3MacBook-Pro.local:7777<3
+2021/10/27 00:31:40 <3MacBook-Pro.local:7781<3
+2021/10/27 00:31:40 <3MacBook-Pro.local:7784<3
+2021/10/27 00:31:42 <3MacBook-Pro.local:7783<3
+2021/10/27 00:31:42 <3MacBook-Pro.local:7778<3
+2021/10/27 00:31:43 <3MacBook-Pro.local:7780<3
+2021/10/27 00:31:43 <3MacBook-Pro.local:7782<3
+2021/10/27 00:31:44 <3MacBook-Pro.local:7785<3
+2021/10/27 00:31:44 <3MacBook-Pro.local:7786<3
+2021/10/27 00:31:45 <3MacBook-Pro.local:7779<3
+2021/10/27 00:31:45 <3MacBook-Pro.local:7777<3
+2021/10/27 00:31:45 <3MacBook-Pro.local:7781<3
+2021/10/27 00:31:45 <3MacBook-Pro.local:7784<3
+2021/10/27 00:31:47 <3MacBook-Pro.local:7783<3
+2021/10/27 00:31:47 <3MacBook-Pro.local:7778<3
+2021/10/27 00:31:48 <3MacBook-Pro.local:7780<3
+2021/10/27 00:31:48 <3MacBook-Pro.local:7782<3
+2021/10/27 00:31:49 <3MacBook-Pro.local:7785<3
+2021/10/27 00:31:49 <3MacBook-Pro.local:7786<3
+2021/10/27 00:31:50 MacBook-Pro.local:7785: count=17 beats=19
+2021/10/27 00:31:50 MacBook-Pro.local:7777: count=135 beats=137
+2021/10/27 00:31:50 MacBook-Pro.local:7778: count=68 beats=70
+2021/10/27 00:31:50 MacBook-Pro.local:7779: count=47 beats=49
+2021/10/27 00:31:50 MacBook-Pro.local:7780: count=43 beats=45
+2021/10/27 00:31:50 MacBook-Pro.local:7781: count=38 beats=40
+2021/10/27 00:31:50 MacBook-Pro.local:7782: count=30 beats=32
+2021/10/27 00:31:50 MacBook-Pro.local:7783: count=26 beats=28
+2021/10/27 00:31:50 MacBook-Pro.local:7784: count=20 beats=22
+2021/10/27 00:31:50 MacBook-Pro.local:7786: count=13 beats=15
+2021/10/27 00:31:50 <3MacBook-Pro.local:7779<3
+2021/10/27 00:31:50 <3MacBook-Pro.local:7777<3
+2021/10/27 00:31:50 <3MacBook-Pro.local:7781<3
+2021/10/27 00:31:50 <3MacBook-Pro.local:7784<3
+2021/10/27 00:31:52 <3MacBook-Pro.local:7783<3
+2021/10/27 00:31:52 <3MacBook-Pro.local:7778<3
+2021/10/27 00:31:53 <3MacBook-Pro.local:7780<3
+2021/10/27 00:31:53 <3MacBook-Pro.local:7782<3
+2021/10/27 00:31:54 <3MacBook-Pro.local:7785<3
+2021/10/27 00:31:54 <3MacBook-Pro.local:7786<3
+2021/10/27 00:31:55 <3MacBook-Pro.local:7779<3
+2021/10/27 00:31:55 <3MacBook-Pro.local:7777<3
+2021/10/27 00:31:55 <3MacBook-Pro.local:7781<3
+2021/10/27 00:31:55 <3MacBook-Pro.local:7784<3
+2021/10/27 00:31:57 <3MacBook-Pro.local:7783<3
+2021/10/27 00:31:57 <3MacBook-Pro.local:7778<3
+2021/10/27 00:31:58 <3MacBook-Pro.local:7780<3
+2021/10/27 00:31:58 <3MacBook-Pro.local:7782<3
+2021/10/27 00:31:59 <3MacBook-Pro.local:7785<3
+2021/10/27 00:31:59 <3MacBook-Pro.local:7786<3
+2021/10/27 00:32:00 MacBook-Pro.local:7777: count=137 beats=139
+2021/10/27 00:32:00 MacBook-Pro.local:7778: count=70 beats=72
+2021/10/27 00:32:00 MacBook-Pro.local:7779: count=49 beats=51
+2021/10/27 00:32:00 MacBook-Pro.local:7780: count=45 beats=47
+2021/10/27 00:32:00 MacBook-Pro.local:7781: count=40 beats=42
+2021/10/27 00:32:00 MacBook-Pro.local:7785: count=19 beats=21
+2021/10/27 00:32:00 MacBook-Pro.local:7782: count=32 beats=34
+2021/10/27 00:32:00 MacBook-Pro.local:7783: count=28 beats=30
+2021/10/27 00:32:00 MacBook-Pro.local:7784: count=22 beats=24
+2021/10/27 00:32:00 MacBook-Pro.local:7786: count=15 beats=17
+2021/10/27 00:32:00 <3MacBook-Pro.local:7779<3
+2021/10/27 00:32:00 <3MacBook-Pro.local:7777<3
+2021/10/27 00:32:00 <3MacBook-Pro.local:7781<3
+2021/10/27 00:32:00 <3MacBook-Pro.local:7784<3
+2021/10/27 00:32:02 <3MacBook-Pro.local:7783<3
+2021/10/27 00:32:02 <3MacBook-Pro.local:7778<3
+2021/10/27 00:32:03 <3MacBook-Pro.local:7780<3
+2021/10/27 00:32:03 <3MacBook-Pro.local:7782<3
+2021/10/27 00:32:04 <3MacBook-Pro.local:7785<3
+2021/10/27 00:32:04 <3MacBook-Pro.local:7786<3
+2021/10/27 00:32:05 <3MacBook-Pro.local:7779<3
+2021/10/27 00:32:05 <3MacBook-Pro.local:7777<3
+2021/10/27 00:32:05 <3MacBook-Pro.local:7781<3
+2021/10/27 00:32:05 <3MacBook-Pro.local:7784<3
+2021/10/27 00:32:07 <3MacBook-Pro.local:7783<3
+2021/10/27 00:32:07 <3MacBook-Pro.local:7778<3
+2021/10/27 00:32:08 <3MacBook-Pro.local:7780<3
+2021/10/27 00:32:08 <3MacBook-Pro.local:7782<3
+2021/10/27 00:32:09 <3MacBook-Pro.local:7785<3
+2021/10/27 00:32:09 <3MacBook-Pro.local:7786<3
+2021/10/27 00:32:10 MacBook-Pro.local:7786: count=17 beats=19
+2021/10/27 00:32:10 MacBook-Pro.local:7782: count=34 beats=36
+2021/10/27 00:32:10 MacBook-Pro.local:7783: count=30 beats=32
+2021/10/27 00:32:10 MacBook-Pro.local:7784: count=24 beats=26
+2021/10/27 00:32:10 MacBook-Pro.local:7780: count=47 beats=49
+2021/10/27 00:32:10 MacBook-Pro.local:7781: count=42 beats=44
+2021/10/27 00:32:10 MacBook-Pro.local:7785: count=21 beats=23
+2021/10/27 00:32:10 MacBook-Pro.local:7777: count=139 beats=141
+2021/10/27 00:32:10 MacBook-Pro.local:7778: count=72 beats=74
+2021/10/27 00:32:10 MacBook-Pro.local:7779: count=51 beats=53
+2021/10/27 00:32:10 <3MacBook-Pro.local:7779<3
+2021/10/27 00:32:10 <3MacBook-Pro.local:7777<3
+2021/10/27 00:32:10 <3MacBook-Pro.local:7781<3
+2021/10/27 00:32:10 <3MacBook-Pro.local:7784<3
+2021/10/27 00:32:12 <3MacBook-Pro.local:7783<3
+2021/10/27 00:32:12 <3MacBook-Pro.local:7778<3
+2021/10/27 00:32:13 <3MacBook-Pro.local:7780<3
+2021/10/27 00:32:13 <3MacBook-Pro.local:7782<3
+2021/10/27 00:32:14 <3MacBook-Pro.local:7785<3
+2021/10/27 00:32:14 <3MacBook-Pro.local:7786<3
+2021/10/27 00:32:15 <3MacBook-Pro.local:7779<3
+2021/10/27 00:32:15 <3MacBook-Pro.local:7777<3
+2021/10/27 00:32:15 <3MacBook-Pro.local:7781<3
+2021/10/27 00:32:15 <3MacBook-Pro.local:7784<3
+2021/10/27 00:32:17 <3MacBook-Pro.local:7783<3
+2021/10/27 00:32:17 <3MacBook-Pro.local:7778<3
+2021/10/27 00:32:18 <3MacBook-Pro.local:7780<3
+2021/10/27 00:32:18 <3MacBook-Pro.local:7782<3
+2021/10/27 00:32:19 <3MacBook-Pro.local:7785<3
+2021/10/27 00:32:19 <3MacBook-Pro.local:7786<3
+2021/10/27 00:32:20 MacBook-Pro.local:7782: count=36 beats=38
+2021/10/27 00:32:20 MacBook-Pro.local:7783: count=32 beats=34
+2021/10/27 00:32:20 MacBook-Pro.local:7784: count=26 beats=28
+2021/10/27 00:32:20 MacBook-Pro.local:7786: count=19 beats=21
+2021/10/27 00:32:20 MacBook-Pro.local:7781: count=44 beats=46
+2021/10/27 00:32:20 MacBook-Pro.local:7785: count=23 beats=25
+2021/10/27 00:32:20 MacBook-Pro.local:7777: count=141 beats=143
+2021/10/27 00:32:20 MacBook-Pro.local:7778: count=74 beats=76
+2021/10/27 00:32:20 MacBook-Pro.local:7779: count=53 beats=55
+2021/10/27 00:32:20 MacBook-Pro.local:7780: count=49 beats=51
+2021/10/27 00:32:20 <3MacBook-Pro.local:7779<3
+2021/10/27 00:32:20 <3MacBook-Pro.local:7777<3
+2021/10/27 00:32:20 <3MacBook-Pro.local:7781<3
+2021/10/27 00:32:20 <3MacBook-Pro.local:7784<3
+2021/10/27 00:32:22 <3MacBook-Pro.local:7783<3
+2021/10/27 00:32:22 <3MacBook-Pro.local:7778<3
+2021/10/27 00:32:23 <3MacBook-Pro.local:7780<3
+2021/10/27 00:32:23 <3MacBook-Pro.local:7782<3
+2021/10/27 00:32:24 <3MacBook-Pro.local:7785<3
+2021/10/27 00:32:24 <3MacBook-Pro.local:7786<3
+2021/10/27 00:32:25 <3MacBook-Pro.local:7779<3
+2021/10/27 00:32:25 <3MacBook-Pro.local:7777<3
+2021/10/27 00:32:25 <3MacBook-Pro.local:7781<3
+2021/10/27 00:32:25 <3MacBook-Pro.local:7784<3
+2021/10/27 00:32:27 <3MacBook-Pro.local:7783<3
+2021/10/27 00:32:27 <3MacBook-Pro.local:7778<3
+2021/10/27 00:32:28 <3MacBook-Pro.local:7780<3
+2021/10/27 00:32:28 <3MacBook-Pro.local:7782<3
+2021/10/27 00:32:29 <3MacBook-Pro.local:7785<3
+2021/10/27 00:32:29 <3MacBook-Pro.local:7786<3
+2021/10/27 00:32:30 MacBook-Pro.local:7782: count=38 beats=40
+2021/10/27 00:32:30 MacBook-Pro.local:7783: count=34 beats=36
+2021/10/27 00:32:30 MacBook-Pro.local:7784: count=28 beats=30
+2021/10/27 00:32:30 MacBook-Pro.local:7786: count=21 beats=23
+2021/10/27 00:32:30 MacBook-Pro.local:7777: count=143 beats=145
+2021/10/27 00:32:30 MacBook-Pro.local:7778: count=76 beats=78
+2021/10/27 00:32:30 MacBook-Pro.local:7779: count=55 beats=57
+2021/10/27 00:32:30 MacBook-Pro.local:7780: count=51 beats=53
+2021/10/27 00:32:30 MacBook-Pro.local:7781: count=46 beats=48
+2021/10/27 00:32:30 MacBook-Pro.local:7785: count=25 beats=27
+2021/10/27 00:32:30 <3MacBook-Pro.local:7779<3
+2021/10/27 00:32:30 <3MacBook-Pro.local:7777<3
+2021/10/27 00:32:30 <3MacBook-Pro.local:7781<3
+2021/10/27 00:32:30 <3MacBook-Pro.local:7784<3
+2021/10/27 00:32:32 <3MacBook-Pro.local:7783<3
+2021/10/27 00:32:32 <3MacBook-Pro.local:7778<3
+2021/10/27 00:32:33 <3MacBook-Pro.local:7780<3
+2021/10/27 00:32:33 <3MacBook-Pro.local:7782<3
+2021/10/27 00:32:34 <3MacBook-Pro.local:7785<3
+2021/10/27 00:32:35 <3MacBook-Pro.local:7786<3
+2021/10/27 00:32:35 <3MacBook-Pro.local:7779<3
+2021/10/27 00:32:35 <3MacBook-Pro.local:7777<3
+2021/10/27 00:32:35 <3MacBook-Pro.local:7781<3
+2021/10/27 00:32:35 <3MacBook-Pro.local:7784<3
+2021/10/27 00:32:37 <3MacBook-Pro.local:7783<3
+2021/10/27 00:32:37 <3MacBook-Pro.local:7778<3
+2021/10/27 00:32:38 <3MacBook-Pro.local:7780<3
+2021/10/27 00:32:38 <3MacBook-Pro.local:7782<3
+2021/10/27 00:32:39 <3MacBook-Pro.local:7785<3
+2021/10/27 00:32:39 GoRoutines: 2
+2021/10/27 00:32:40 <3MacBook-Pro.local:7786<3
+2021/10/27 00:32:40 MacBook-Pro.local:7785: count=27 beats=29
+2021/10/27 00:32:40 MacBook-Pro.local:7777: count=145 beats=147
+2021/10/27 00:32:40 MacBook-Pro.local:7778: count=78 beats=80
+2021/10/27 00:32:40 MacBook-Pro.local:7779: count=57 beats=59
+2021/10/27 00:32:40 MacBook-Pro.local:7780: count=53 beats=55
+2021/10/27 00:32:40 MacBook-Pro.local:7781: count=48 beats=50
+2021/10/27 00:32:40 MacBook-Pro.local:7782: count=40 beats=42
+2021/10/27 00:32:40 MacBook-Pro.local:7783: count=36 beats=38
+2021/10/27 00:32:40 MacBook-Pro.local:7784: count=30 beats=32
+2021/10/27 00:32:40 MacBook-Pro.local:7786: count=23 beats=25
+2021/10/27 00:32:40 <3MacBook-Pro.local:7779<3
+2021/10/27 00:32:40 <3MacBook-Pro.local:7777<3
+2021/10/27 00:32:40 <3MacBook-Pro.local:7781<3
+2021/10/27 00:32:40 <3MacBook-Pro.local:7784<3
+2021/10/27 00:32:41 Sending ls response to client
+2021/10/27 00:32:42 <3MacBook-Pro.local:7783<3
+2021/10/27 00:32:42 <3MacBook-Pro.local:7778<3
+2021/10/27 00:32:43 <3MacBook-Pro.local:7780<3
+2021/10/27 00:32:43 <3MacBook-Pro.local:7782<3
+2021/10/27 00:32:44 <3MacBook-Pro.local:7785<3
+2021/10/27 00:32:45 <3MacBook-Pro.local:7786<3
+2021/10/27 00:32:45 <3MacBook-Pro.local:7779<3
+2021/10/27 00:32:45 <3MacBook-Pro.local:7777<3
+2021/10/27 00:32:45 <3MacBook-Pro.local:7781<3
+2021/10/27 00:32:45 <3MacBook-Pro.local:7784<3
+2021/10/27 00:32:47 <3MacBook-Pro.local:7783<3
+2021/10/27 00:32:47 <3MacBook-Pro.local:7778<3
+2021/10/27 00:32:48 <3MacBook-Pro.local:7780<3
+2021/10/27 00:32:48 <3MacBook-Pro.local:7782<3
+2021/10/27 00:32:49 <3MacBook-Pro.local:7785<3
+2021/10/27 00:32:50 <3MacBook-Pro.local:7786<3
+2021/10/27 00:32:50 MacBook-Pro.local:7777: count=147 beats=149
+2021/10/27 00:32:50 MacBook-Pro.local:7778: count=80 beats=82
+2021/10/27 00:32:50 MacBook-Pro.local:7779: count=59 beats=61
+2021/10/27 00:32:50 MacBook-Pro.local:7780: count=55 beats=57
+2021/10/27 00:32:50 MacBook-Pro.local:7781: count=50 beats=52
+2021/10/27 00:32:50 MacBook-Pro.local:7785: count=29 beats=31
+2021/10/27 00:32:50 MacBook-Pro.local:7782: count=42 beats=44
+2021/10/27 00:32:50 MacBook-Pro.local:7783: count=38 beats=40
+2021/10/27 00:32:50 MacBook-Pro.local:7784: count=32 beats=34
+2021/10/27 00:32:50 MacBook-Pro.local:7786: count=25 beats=27
+2021/10/27 00:32:50 Checking file index for file
+2021/10/27 00:32:50 Put request received
+2021/10/27 00:32:50 Unpacking file metadata
+2021/10/27 00:32:50 file_name:"test_file_5.bin"  file_size:195035136  num_chunks:2  chunk_size:150000000  check_sum:"6c425b0520c96bffae651fb226903618dfc65ff5ba7bcf2f10ad01be3557abce"
+2021/10/27 00:32:50 Result: File doesn't exist
+2021/10/27 00:32:50 Exists = false
+2021/10/27 00:32:50 NumChunks: 2
+2021/10/27 00:32:50 NumNodes: 10
+2021/10/27 00:32:50 Adding MacBook-Pro.local:7782 to destination nodes
+2021/10/27 00:32:50 Adding MacBook-Pro.local:7783 to destination nodes
+2021/10/27 00:32:50 -> 0_test_file_5.bin 
+2021/10/27 00:32:50 MacBook-Pro.local:7782 
+2021/10/27 00:32:50 MacBook-Pro.local:7783 
+2021/10/27 00:32:50 MacBook-Pro.local:7782 
+2021/10/27 00:32:50 -> 1_test_file_5.bin 
+2021/10/27 00:32:50 MacBook-Pro.local:7783 
+2021/10/27 00:32:50 MacBook-Pro.local:7782 
+2021/10/27 00:32:50 MacBook-Pro.local:7783 
+2021/10/27 00:32:50 Adding destination nodes to file index
+2021/10/27 00:32:50 Current status of nodeToChunksIndex
+2021/10/27 00:32:50 MacBook-Pro.local:7786
+2021/10/27 00:32:50 MacBook-Pro.local:7777
+2021/10/27 00:32:50 MacBook-Pro.local:7780
+2021/10/27 00:32:50 MacBook-Pro.local:7781
+2021/10/27 00:32:50 MacBook-Pro.local:7783
+2021/10/27 00:32:50 ->0_test_file_5.bin
+2021/10/27 00:32:50 ->1_test_file_5.bin
+2021/10/27 00:32:50 ->1_test_file_5.bin
+2021/10/27 00:32:50 MacBook-Pro.local:7785
+2021/10/27 00:32:50 MacBook-Pro.local:7778
+2021/10/27 00:32:50 MacBook-Pro.local:7779
+2021/10/27 00:32:50 MacBook-Pro.local:7782
+2021/10/27 00:32:50 ->0_test_file_5.bin
+2021/10/27 00:32:50 ->0_test_file_5.bin
+2021/10/27 00:32:50 ->1_test_file_5.bin
+2021/10/27 00:32:50 MacBook-Pro.local:7784
+2021/10/27 00:32:50 Sending put response to client
+2021/10/27 00:32:50 <3MacBook-Pro.local:7779<3
+2021/10/27 00:32:50 <3MacBook-Pro.local:7777<3
+2021/10/27 00:32:50 <3MacBook-Pro.local:7781<3
+2021/10/27 00:32:50 <3MacBook-Pro.local:7784<3
+2021/10/27 00:32:52 <3MacBook-Pro.local:7783<3
+2021/10/27 00:32:52 <3MacBook-Pro.local:7778<3
+2021/10/27 00:32:53 <3MacBook-Pro.local:7780<3
+2021/10/27 00:32:54 <3MacBook-Pro.local:7785<3
+2021/10/27 00:32:55 <3MacBook-Pro.local:7786<3
+2021/10/27 00:32:55 <3MacBook-Pro.local:7779<3
+2021/10/27 00:32:55 <3MacBook-Pro.local:7777<3
+2021/10/27 00:32:55 <3MacBook-Pro.local:7781<3
+2021/10/27 00:32:55 <3MacBook-Pro.local:7784<3
+2021/10/27 00:32:57 <3MacBook-Pro.local:7783<3
+2021/10/27 00:32:57 <3MacBook-Pro.local:7778<3
+2021/10/27 00:32:58 <3MacBook-Pro.local:7780<3
+2021/10/27 00:32:59 <3MacBook-Pro.local:7785<3
+2021/10/27 00:33:00 <3MacBook-Pro.local:7786<3
+2021/10/27 00:33:00 MacBook-Pro.local:7782: count=44 beats=44
+2021/10/27 00:33:00 Recovery Initiated for MacBook-Pro.local:7782
+2021/10/27 00:33:00 Chunks to be copied: 
+2021/10/27 00:33:00 >0_test_file_5.bin
+2021/10/27 00:33:00 >0_test_file_5.bin
+2021/10/27 00:33:00 >1_test_file_5.bin
+2021/10/27 00:33:00 FIND SENDER: MacBook-Pro.local:7782 vs MacBook-Pro.local:7782
+2021/10/27 00:33:00 FIND SENDER: MacBook-Pro.local:7783 vs MacBook-Pro.local:7782
+2021/10/27 00:33:00 RETURNING SENDER AS MacBook-Pro.local:7783
+2021/10/27 00:33:00 <3MacBook-Pro.local:7779<3
+2021/10/27 00:33:00 <3MacBook-Pro.local:7777<3
+2021/10/27 00:33:00 <3MacBook-Pro.local:7781<3
+2021/10/27 00:33:00 <3MacBook-Pro.local:7784<3
+2021/10/27 00:33:02 <3MacBook-Pro.local:7783<3
+2021/10/27 00:33:02 <3MacBook-Pro.local:7778<3
+2021/10/27 00:33:03 <3MacBook-Pro.local:7780<3
+2021/10/27 00:33:04 <3MacBook-Pro.local:7785<3
+2021/10/27 00:33:05 <3MacBook-Pro.local:7786<3
+2021/10/27 00:33:05 <3MacBook-Pro.local:7779<3
+2021/10/27 00:33:05 <3MacBook-Pro.local:7777<3
+2021/10/27 00:33:05 <3MacBook-Pro.local:7781<3
+2021/10/27 00:33:05 <3MacBook-Pro.local:7784<3
+2021/10/27 00:33:07 <3MacBook-Pro.local:7783<3
+2021/10/27 00:33:07 <3MacBook-Pro.local:7778<3
+2021/10/27 00:33:08 <3MacBook-Pro.local:7780<3
+2021/10/27 00:33:09 <3MacBook-Pro.local:7785<3
+2021/10/27 00:33:10 <3MacBook-Pro.local:7786<3
+2021/10/27 00:33:10 <3MacBook-Pro.local:7779<3
+2021/10/27 00:33:10 <3MacBook-Pro.local:7777<3
+2021/10/27 00:33:10 <3MacBook-Pro.local:7781<3
+2021/10/27 00:33:10 <3MacBook-Pro.local:7784<3
+2021/10/27 00:33:12 <3MacBook-Pro.local:7783<3
+2021/10/27 00:33:12 <3MacBook-Pro.local:7778<3
+2021/10/27 00:33:13 <3MacBook-Pro.local:7780<3
+2021/10/27 00:33:14 <3MacBook-Pro.local:7785<3
+2021/10/27 00:33:15 <3MacBook-Pro.local:7786<3
+2021/10/27 00:33:15 <3MacBook-Pro.local:7779<3
+2021/10/27 00:33:15 <3MacBook-Pro.local:7777<3
+2021/10/27 00:33:15 <3MacBook-Pro.local:7781<3
+2021/10/27 00:33:15 <3MacBook-Pro.local:7784<3
+2021/10/27 00:33:17 <3MacBook-Pro.local:7783<3
+2021/10/27 00:33:17 <3MacBook-Pro.local:7778<3
+2021/10/27 00:33:18 <3MacBook-Pro.local:7780<3
+2021/10/27 00:33:19 <3MacBook-Pro.local:7785<3
+2021/10/27 00:33:20 <3MacBook-Pro.local:7786<3
+2021/10/27 00:33:20 <3MacBook-Pro.local:7779<3
+2021/10/27 00:33:20 <3MacBook-Pro.local:7777<3
+2021/10/27 00:33:20 <3MacBook-Pro.local:7781<3
+2021/10/27 00:33:20 <3MacBook-Pro.local:7784<3
+2021/10/27 00:33:22 <3MacBook-Pro.local:7783<3
+2021/10/27 00:33:22 <3MacBook-Pro.local:7778<3
+2021/10/27 00:33:23 <3MacBook-Pro.local:7780<3
+2021/10/27 00:33:24 <3MacBook-Pro.local:7785<3
+2021/10/27 00:33:25 <3MacBook-Pro.local:7786<3
+2021/10/27 00:33:25 <3MacBook-Pro.local:7779<3
+2021/10/27 00:33:25 <3MacBook-Pro.local:7777<3
+2021/10/27 00:33:25 <3MacBook-Pro.local:7781<3
+2021/10/27 00:33:25 <3MacBook-Pro.local:7784<3
+2021/10/27 00:33:27 <3MacBook-Pro.local:7783<3
+2021/10/27 00:33:27 <3MacBook-Pro.local:7778<3
+2021/10/27 00:33:28 <3MacBook-Pro.local:7780<3
+2021/10/27 00:33:29 <3MacBook-Pro.local:7785<3
+2021/10/27 00:33:30 <3MacBook-Pro.local:7786<3
+2021/10/27 00:33:30 <3MacBook-Pro.local:7779<3
+2021/10/27 00:33:30 <3MacBook-Pro.local:7777<3
+2021/10/27 00:33:30 <3MacBook-Pro.local:7781<3
+2021/10/27 00:33:30 <3MacBook-Pro.local:7784<3
+2021/10/27 00:33:32 <3MacBook-Pro.local:7783<3
+2021/10/27 00:33:32 <3MacBook-Pro.local:7778<3
+2021/10/27 00:33:33 <3MacBook-Pro.local:7780<3
+2021/10/27 00:33:34 <3MacBook-Pro.local:7785<3
+2021/10/27 00:33:35 <3MacBook-Pro.local:7786<3
+2021/10/27 00:33:35 <3MacBook-Pro.local:7779<3
+2021/10/27 00:33:35 <3MacBook-Pro.local:7777<3
+2021/10/27 00:33:35 <3MacBook-Pro.local:7781<3
+2021/10/27 00:33:35 <3MacBook-Pro.local:7784<3
+2021/10/27 00:33:37 <3MacBook-Pro.local:7783<3
+2021/10/27 00:33:37 <3MacBook-Pro.local:7778<3
+2021/10/27 00:33:38 <3MacBook-Pro.local:7780<3
+2021/10/27 00:33:40 <3MacBook-Pro.local:7785<3
+2021/10/27 00:33:40 <3MacBook-Pro.local:7786<3
+2021/10/27 00:33:40 <3MacBook-Pro.local:7779<3
+2021/10/27 00:33:40 <3MacBook-Pro.local:7777<3
+2021/10/27 00:33:40 <3MacBook-Pro.local:7781<3
+2021/10/27 00:33:40 <3MacBook-Pro.local:7784<3
+2021/10/27 00:33:42 <3MacBook-Pro.local:7783<3
+2021/10/27 00:33:42 <3MacBook-Pro.local:7778<3
+2021/10/27 00:33:43 <3MacBook-Pro.local:7780<3
+2021/10/27 00:33:45 <3MacBook-Pro.local:7785<3
+2021/10/27 00:33:45 <3MacBook-Pro.local:7786<3
+2021/10/27 00:33:45 <3MacBook-Pro.local:7779<3
+2021/10/27 00:33:45 <3MacBook-Pro.local:7777<3
+2021/10/27 00:33:45 <3MacBook-Pro.local:7781<3
+2021/10/27 00:33:45 <3MacBook-Pro.local:7784<3
+2021/10/27 00:33:47 <3MacBook-Pro.local:7783<3
+2021/10/27 00:33:47 <3MacBook-Pro.local:7778<3
+2021/10/27 00:33:48 <3MacBook-Pro.local:7780<3
+2021/10/27 00:33:50 <3MacBook-Pro.local:7785<3
+2021/10/27 00:33:50 <3MacBook-Pro.local:7786<3
+2021/10/27 00:33:50 <3MacBook-Pro.local:7779<3
+2021/10/27 00:33:50 <3MacBook-Pro.local:7777<3
+2021/10/27 00:33:50 <3MacBook-Pro.local:7781<3
+2021/10/27 00:33:50 <3MacBook-Pro.local:7784<3
+2021/10/27 00:33:52 <3MacBook-Pro.local:7783<3
+2021/10/27 00:33:52 <3MacBook-Pro.local:7778<3
+2021/10/27 00:33:53 <3MacBook-Pro.local:7780<3
+2021/10/27 00:33:55 <3MacBook-Pro.local:7785<3
+2021/10/27 00:33:55 <3MacBook-Pro.local:7786<3
+2021/10/27 00:33:55 <3MacBook-Pro.local:7779<3
+2021/10/27 00:33:55 <3MacBook-Pro.local:7777<3
+2021/10/27 00:33:55 <3MacBook-Pro.local:7781<3
+2021/10/27 00:33:55 <3MacBook-Pro.local:7784<3
+2021/10/27 00:33:57 <3MacBook-Pro.local:7783<3
+2021/10/27 00:33:57 <3MacBook-Pro.local:7778<3
+2021/10/27 00:33:58 <3MacBook-Pro.local:7780<3
+2021/10/27 00:34:00 <3MacBook-Pro.local:7785<3
+2021/10/27 00:34:00 <3MacBook-Pro.local:7786<3
+2021/10/27 00:34:00 <3MacBook-Pro.local:7779<3
+2021/10/27 00:34:00 <3MacBook-Pro.local:7777<3
+2021/10/27 00:34:00 <3MacBook-Pro.local:7781<3
+2021/10/27 00:34:00 <3MacBook-Pro.local:7784<3
+2021/10/27 00:34:02 <3MacBook-Pro.local:7778<3
+2021/10/27 00:34:03 <3MacBook-Pro.local:7780<3
+2021/10/27 00:34:05 <3MacBook-Pro.local:7785<3
+2021/10/27 00:34:05 <3MacBook-Pro.local:7786<3
+2021/10/27 00:34:05 <3MacBook-Pro.local:7779<3
+2021/10/27 00:34:05 <3MacBook-Pro.local:7777<3
+2021/10/27 00:34:05 <3MacBook-Pro.local:7781<3
+2021/10/27 00:34:07 <3MacBook-Pro.local:7778<3
+2021/10/27 00:34:08 <3MacBook-Pro.local:7780<3
+2021/10/27 00:34:10 <3MacBook-Pro.local:7786<3
+2021/10/27 00:34:10 <3MacBook-Pro.local:7779<3
+2021/10/27 00:34:10 <3MacBook-Pro.local:7777<3
+2021/10/27 00:34:10 <3MacBook-Pro.local:7781<3
+2021/10/27 00:34:12 <3MacBook-Pro.local:7778<3
+2021/10/27 00:34:13 <3MacBook-Pro.local:7780<3
+2021/10/27 00:34:15 <3MacBook-Pro.local:7777<3
+2021/10/27 00:34:15 <3MacBook-Pro.local:7781<3
+2021/10/27 00:34:17 <3MacBook-Pro.local:7778<3

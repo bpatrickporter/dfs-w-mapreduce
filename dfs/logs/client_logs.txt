@@ -1,0 +1,18 @@
+2021/10/27 00:32:39 Client start up complete
+2021/10/27 00:32:49 Put input received
+2021/10/27 00:32:50 Sending put request
+2021/10/27 00:32:50 Received put response status: true
+2021/10/27 00:32:50 Sending chunks to the following destinations: 
+2021/10/27 00:32:50 MacBook-Pro.local:7782
+2021/10/27 00:32:50 MacBook-Pro.local:7783
+2021/10/27 00:32:50 -> 0_test_file_5.bin 
+2021/10/27 00:32:50 MacBook-Pro.local:7782 
+2021/10/27 00:32:50 MacBook-Pro.local:7783 
+2021/10/27 00:32:50 MacBook-Pro.local:7782 
+2021/10/27 00:32:50 -> 1_test_file_5.bin 
+2021/10/27 00:32:50 MacBook-Pro.local:7783 
+2021/10/27 00:32:50 MacBook-Pro.local:7782 
+2021/10/27 00:32:50 MacBook-Pro.local:7783 
+2021/10/27 00:32:50 Packaging chunk: 0_test_file_5.bin
+2021/10/27 00:32:50 Metadata: 150000000
+2021/10/27 00:32:50 ChunkMetadata: 150000000
