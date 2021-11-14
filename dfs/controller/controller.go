@@ -392,7 +392,7 @@ func RecordHeartBeat(node string, context context) {
 		}
 	} else {
 		context.activeNodes.cmap[node]++
-		log.Println("<3" + node + "<3")
+		//log.Println("<3" + node + "<3")
 	}
 	context.activeNodes.lock.Unlock()
 }
@@ -417,7 +417,7 @@ func HandleHeartBeats(conn net.Conn, context context) {
 
 func ListenForHeartBeats(listeningPort string, context context) {
 	log.Println("HEARTBEAT LISTENER ROUTINE LAUNCHED")
-	go AnalyzeHeartBeats(context)
+	//go AnalyzeHeartBeats(context)
 	for {
 		listener, err := net.Listen("tcp", ":"+ listeningPort)
 		if err != nil {
