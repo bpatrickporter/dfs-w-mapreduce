@@ -109,6 +109,28 @@ func UnpackGetResponse(msg *messages.Wrapper_GetResponseMessage) (bool, []string
 	return fileExists, chunks, nodes
 }
 
+func UnpackComputeResponse(msg *messages.Wrapper_ComputeResponseMessage) (bool, []string, []string, string, string, string) {
+	fileExists := msg.ComputeResponseMessage.InputFileExists
+	chunks := msg.ComputeResponseMessage.Chunks
+	nodes := msg.ComputeResponseMessage.Nodes
+	inputFile := msg.ComputeResponseMessage.InputFile
+	outputFile := msg.ComputeResponseMessage.OutputFile
+	jobFile := msg.ComputeResponseMessage.JobFile
+	log.Println("Compute Response message received")
+	log.Println("FileExists: " + strconv.FormatBool(fileExists) + "\n" +
+		"InputFile: " + inputFile + "\n" +
+		"OutputFile: " + outputFile + "\n" +
+		"JobFile: " + jobFile + "\n")
+	log.Println("File exists: " + strconv.FormatBool(fileExists))
+	for i := range chunks {
+		log.Println(chunks[i] + " @ " + nodes[i])
+	}
+	if !fileExists {
+		fmt.Println("File doesn't exist")
+	}
+	return fileExists, chunks, nodes, inputFile, outputFile, jobFile
+}
+
 func PackagePutRequest(fileName string) *messages.Wrapper {
 	log.Println("Put input received")
 	fileSize, checkSum, isTextFile := GetMetadata(fileName)
@@ -168,6 +190,30 @@ func PackageGetRequest(fileName string) *messages.Wrapper {
 	return wrapper
 }
 
+func PackageJobRequest(chunk string, jobFile string, jobLength int) *messages.Wrapper {
+	msg := messages.JobRequest{
+		ChunkName: chunk,
+		JobFileName: jobFile,
+		JobFileSize: int32(jobLength)}
+	wrapper := &messages.Wrapper{
+		Msg: &messages.Wrapper_JobRequestMessage{
+			JobRequestMessage: &msg},
+	}
+	return wrapper
+}
+
+func PackageComputationRequest(job string, input string, output string) *messages.Wrapper {
+	msg := messages.ComputeRequest{
+		JobFile: job,
+		InputFile: input,
+		OutputFile: output}
+	wrapper := &messages.Wrapper{
+		Msg: &messages.Wrapper_ComputeRequestMessage{
+			ComputeRequestMessage: &msg},
+	}
+	return wrapper
+}
+
 func PackageCorruptFileNotice(node string, chunk string) *messages.Wrapper {
 	msg := messages.CorruptFileNotice{
 		Node: node,
@@ -198,6 +244,19 @@ func GetParam(message string) string {
 		return ""
 	} else {
 		return words[1]
+	}
+}
+
+func GetParams(message string) (string, string, string) {
+	words := strings.Split(message, " ")
+	if len(words) < 4 {
+		fmt.Println("Try again. Correct format: compute <job.go> <input_file> <output_file")
+		return "", "", ""
+	} else {
+		log.Println("Job: " + words[1] + "\n" +
+			"Input: " + words[2] + "\n" +
+			"Output" + words[3])
+		return words[1], words[2], words[3]
 	}
 }
 
@@ -407,6 +466,38 @@ func SendChunks(metadata *messages.Metadata, destinationNodes []string) {
 	}
 }
 
+func SendJob(chunks []string, nodes []string, inputFile string, outputFile string, jobFile string, context context) {
+	log.Println("Sending job")
+	var wg sync.WaitGroup
+
+	log.Println("Preparing to read: " + jobFile)
+	f, err := os.ReadFile(jobFile)
+	if err != nil {
+		log.Fatalln(err.Error())
+	}
+
+	for i := range chunks {
+		chunk := chunks[i]
+		node := nodes[i]
+		jobLength := len(f)
+		wrapper := PackageJobRequest(chunk, jobFile, jobLength)
+		conn, err := net.Dial("tcp", node)
+		if err != nil {
+			log.Fatalln(err.Error())
+		}
+		messageHandler := messages.NewMessageHandler(conn)
+		messageHandler.Send(wrapper)
+		writer := bufio.NewWriter(conn)
+		reader := bytes.NewReader(f)
+		_, err = io.CopyN(writer, reader, int64(jobLength))
+		log.Println("job sent")
+		wg.Add(1)
+		go HandleConnections(messageHandler, &wg, context, node)
+	}
+	wg.Wait()
+	fmt.Println("File downloaded")
+}
+
 func GetChunks(chunks []string, nodes []string, context context) {
 	log.Println("Going to get chunks")
 	var wg sync.WaitGroup
@@ -508,6 +599,8 @@ func HandleConnections(messageHandler *messages.MessageHandler, waitGroup *sync.
 			}
 			messageHandler.Close()
 			return
+		case *messages.Wrapper_JobResponseMessage:
+			return
 		default:
 			continue
 		}
@@ -552,6 +645,15 @@ func HandleConnection(messageHandler *messages.MessageHandler, context context) 
 		case *messages.Wrapper_InfoResponse:
 			PrintInfoResponse(msg.InfoResponse)
 			return
+		case *messages.Wrapper_ComputeResponseMessage:
+			log.Println("Compute response received")
+			inputFileExists, chunks, nodes, input, output, job := UnpackComputeResponse(msg)
+			log.Println("job: " + job)
+			if inputFileExists {
+				SendJob(chunks, nodes, input, output, job, context)
+				//save results in dfs
+			}
+			return
 		default:
 			continue
 		}
@@ -589,12 +691,18 @@ func HandleInput(scanner *bufio.Scanner, controllerConn net.Conn, context contex
 			}
 			controllerMessageHandler.Send(wrapper)
 			HandleConnection(controllerMessageHandler, context)
-		} else if strings.HasPrefix(message, "info"){
+		} else if strings.HasPrefix(message, "info") {
 			infoRequest := &messages.InfoRequest{}
 			wrapper := &messages.Wrapper{
 				Msg: &messages.Wrapper_InfoRequest{
 					InfoRequest: infoRequest},
 			}
+			controllerMessageHandler.Send(wrapper)
+			HandleConnection(controllerMessageHandler, context)
+		} else if strings.HasPrefix(message, "compute"){
+			fmt.Println("Computing")
+			job, input, output := GetParams(message)
+			wrapper := PackageComputationRequest(job, input, output)
 			controllerMessageHandler.Send(wrapper)
 			HandleConnection(controllerMessageHandler, context)
 		} else if strings.HasPrefix(message, "help"){

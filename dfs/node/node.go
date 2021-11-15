@@ -169,7 +169,7 @@ func WriteMetadataFile(metadata *messages.Metadata, chunkMetadata *messages.Chun
 	return err
 }
 
-func WriteChunk(fileMetadata *messages.Metadata, chunkMetadata *messages.ChunkMetadata, messageHandler *messages.MessageHandler, context context) {
+func ReadChunk(fileMetadata *messages.Metadata, chunkMetadata *messages.ChunkMetadata, messageHandler *messages.MessageHandler, context context) {
 	conn := messageHandler.GetConn()
 	chunkName, _, _, _ := UnpackChunkMetadata(chunkMetadata)
 	err := WriteMetadataFile(fileMetadata, chunkMetadata, context)
@@ -206,6 +206,39 @@ func WriteChunk(fileMetadata *messages.Metadata, chunkMetadata *messages.ChunkMe
 	}
 	log.Println(chunkMetadata.ChunkName + " wrote " + strconv.Itoa(int(n)) + " bytes to file")
 }
+
+func ReadJob(jobFile string, jobLength int, messageHandler *messages.MessageHandler, context context) {
+	log.Println("Reading job: " + jobFile)
+	file, err := os.OpenFile(context.rootDir+jobFile, os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0777)
+	defer file.Close()
+	if err != nil {
+		fmt.Println(err.Error())
+		log.Println(err.Error())
+	}
+
+	conn := messageHandler.GetConn()
+	writer := bufio.NewWriter(file)
+	buffer := make([]byte, jobLength)
+	numBytes, err := io.ReadFull(conn, buffer)
+	if err != nil {
+		log.Println(err.Error())
+
+	}
+	log.Println("Read job: " + jobFile + " - " + strconv.Itoa(numBytes) + " bytes")
+
+	reader := bytes.NewReader(buffer)
+	n, err := io.CopyN(writer, reader, int64(jobLength))
+	if err != nil {
+		log.Println(err.Error())
+	}
+	log.Println("Wrote job: " + jobFile + " - " + strconv.Itoa(int(n)) + " bytes" )
+}
+
+func RunJob(chunk string, jobFile string, messageHandler *messages.MessageHandler, context context) {
+	log.Println("Ran job")
+}
+
+
 
 func DeleteChunk(chunkName string, context context) {
 	log.Println("Delete chunk request received for " + chunkName)
@@ -323,10 +356,16 @@ func HandleConnection(conn net.Conn, context context) {
 			metadata := msg.PutRequestMessage.Metadata
 			chunkMetadata := msg.PutRequestMessage.ChunkMetadata
 			forwardingList := msg.PutRequestMessage.ForwardingList
-			WriteChunk(metadata, chunkMetadata, messageHandler, context)
+			ReadChunk(metadata, chunkMetadata, messageHandler, context)
 			ForwardChunk(metadata, chunkMetadata, forwardingList, context)
 			messageHandler.Close()
 			return
+		case *messages.Wrapper_JobRequestMessage:
+			chunk := msg.JobRequestMessage.ChunkName
+			job := msg.JobRequestMessage.JobFileName
+			jobSize := msg.JobRequestMessage.JobFileSize
+			ReadJob(job, int(jobSize), messageHandler, context)
+			RunJob(chunk, job, messageHandler, context)
 		case *messages.Wrapper_DeleteRequestMessage:
 			chunkName := msg.DeleteRequestMessage.FileName
 			DeleteChunk(chunkName, context)

@@ -297,6 +297,41 @@ func PackageGetResponse(result locationResult, context context) *messages.Wrappe
 	return wrapper
 }
 
+func PackageComputeResponse(inputFile string, outputFile string, jobFile string, result locationResult, context context) *messages.Wrapper {
+	chunks := make([]string, 0)
+	nodes := make([]string, 0)
+
+	if result.fileExists {
+		for chunk, nodeList := range result.chunkLocation {
+			chunks = append(chunks, chunk)
+			for node := range nodeList {
+				if IsActive(nodeList[node], context) {
+					nodes = append(nodes, nodeList[node])
+					break
+				}
+			}
+		}
+		log.Println("Sending compute response with the following node locations: ")
+		for i := range chunks {
+			log.Println(chunks[i] + " @ " + nodes[i])
+		}
+	}
+
+	computeResponse := &messages.ComputeResponse{
+		InputFile: inputFile,
+		OutputFile: outputFile,
+		JobFile: jobFile,
+		InputFileExists: result.fileExists,
+		Chunks: chunks,
+		Nodes: nodes}
+	wrapper := &messages.Wrapper{
+		Msg: &messages.Wrapper_ComputeResponseMessage{
+			ComputeResponseMessage: computeResponse},
+	}
+	log.Println("Sending compute response to client")
+	return wrapper
+}
+
 func PackageLSResponse(listing string) *messages.Wrapper {
 	lsResponse := &messages.LSResponse{Listing: listing}
 	wrapper := &messages.Wrapper{
@@ -576,6 +611,19 @@ func HandleConnection(conn net.Conn, context context) {
 		case *messages.Wrapper_InfoRequest:
 			nodeList, diskSpace, requestsPerNode := GetInfo(context)
 			wrapper := PackageInfoResponse(nodeList, diskSpace, requestsPerNode)
+			messageHandler.Send(wrapper)
+		case *messages.Wrapper_ComputeRequestMessage:
+			log.Println("Compute request message received")
+			inputFile := msg.ComputeRequestMessage.InputFile
+			outputFile := msg.ComputeRequestMessage.OutputFile
+			jobFile := msg.ComputeRequestMessage.JobFile
+			results := FindChunks(inputFile, context)
+			if results.fileExists {
+				log.Println("Input file exists")
+			} else {
+				log.Println("Input file doesn't exist")
+			}
+			wrapper := PackageComputeResponse(inputFile, outputFile, jobFile, results, context)
 			messageHandler.Send(wrapper)
 		case *messages.Wrapper_CorruptFileNoticeMessage:
 			node := msg.CorruptFileNoticeMessage.Node

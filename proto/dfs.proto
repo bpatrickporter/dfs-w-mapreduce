@@ -44,6 +44,22 @@ message GetResponse {
     repeated string nodes = 3;
 }
 
+message ComputeRequest {
+    string job_file = 1;
+    string input_file = 2;
+    string output_file = 3;
+}
+
+message ComputeResponse {
+    string job_file = 1;
+    string input_file = 2;
+    string output_file = 3;
+    bool input_file_exists = 4;
+    repeated string chunks = 5;
+    repeated string nodes = 6;
+
+}
+
 message GetResponseChunk {
     ChunkMetadata chunk_metadata = 1;
     Metadata metadata = 2;
@@ -100,6 +116,16 @@ message CorruptFileNotice {
     string chunk = 2;
 }
 
+message JobRequest {
+    string chunk_name = 1;
+    string job_file_name = 2;
+    int32 job_file_size = 3;
+}
+
+message JobResponse {
+    repeated KeyValuePair results = 1;
+}
+
 message Wrapper {
     oneof msg {
         Ack acknowledge_message = 1;
@@ -117,5 +143,9 @@ message Wrapper {
         InfoResponse info_response = 13;
         RecoveryInstruction recovery_instruction_message = 14;
         CorruptFileNotice corrupt_file_notice_message = 15;
+        ComputeRequest compute_request_message = 16;
+        ComputeResponse compute_response_message = 17;
+        JobRequest job_request_message = 18;
+        JobResponse job_response_message = 19;
     }
 }
