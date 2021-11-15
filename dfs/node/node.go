@@ -91,20 +91,22 @@ func PackageHeartBeat(hostName string, port string) *messages.Wrapper {
 	return wrapper
 }
 
-func UnpackMetadata(metadata *messages.Metadata) (string, int, int, int, string) {
+func UnpackMetadata(metadata *messages.Metadata) (string, int, int, int, string, bool) {
 	fileName := metadata.GetFileName()
 	fileSize := int(metadata.GetFileSize())
 	numChunks := int(metadata.GetNumChunks())
 	chunkSize := int(metadata.GetChunkSize())
 	checkSum := metadata.GetCheckSum()
-	return fileName, fileSize, numChunks, chunkSize, checkSum
+	isTextFile := metadata.IsTextFile
+	return fileName, fileSize, numChunks, chunkSize, checkSum, isTextFile
 }
 
-func UnpackChunkMetadata(metadata *messages.ChunkMetadata) (string, int, string) {
+func UnpackChunkMetadata(metadata *messages.ChunkMetadata) (string, int, string, int) {
 	chunkName := metadata.ChunkName
 	chunkSize := metadata.ChunkSize
 	checkSum := metadata.ChunkCheckSum
-	return chunkName, int(chunkSize), checkSum
+	offset := metadata.Offset
+	return chunkName, int(chunkSize), checkSum, int(offset)
 }
 
 func PackageMetadata(context context, chunkName string) (*messages.Metadata, *messages.ChunkMetadata){
@@ -121,23 +123,27 @@ func PackageMetadata(context context, chunkName string) (*messages.Metadata, *me
 	actualChunkSize, _ := strconv.Atoi(slices[4])
 	checkSum := slices[5]
 	chunkCheckSum := slices[6]
+	isTextFile, _ := strconv.ParseBool(slices[7])
+	offset, _ := strconv.Atoi(slices[8])
 	metadata := &messages.Metadata{
 		FileName: fileName,
 		FileSize: int32(fileSize),
 		NumChunks: int32(numChunks),
 		ChunkSize: int32(standardChunkSize),
-		CheckSum: checkSum}
+		CheckSum: checkSum,
+		IsTextFile: isTextFile}
 	chunkMetadata := &messages.ChunkMetadata{
 		ChunkName: chunkName,
 		ChunkSize: int32(actualChunkSize),
-		ChunkCheckSum: chunkCheckSum}
+		ChunkCheckSum: chunkCheckSum,
+		Offset: int32(offset)}
 
 	return metadata, chunkMetadata
 }
 
 func WriteMetadataFile(metadata *messages.Metadata, chunkMetadata *messages.ChunkMetadata, context context) error {
-	fileName, fileSize, numChunks, standardChunkSize, checkSum := UnpackMetadata(metadata)
-	chunkName, actualChunkSize, chunkCheckSum := UnpackChunkMetadata(chunkMetadata)
+	fileName, fileSize, numChunks, standardChunkSize, checkSum, isTextFile := UnpackMetadata(metadata)
+	chunkName, actualChunkSize, chunkCheckSum, offset := UnpackChunkMetadata(chunkMetadata)
 
 	file, err := os.Create(context.rootDir + "meta_"+ chunkName)
 	defer file.Close()
@@ -153,7 +159,9 @@ func WriteMetadataFile(metadata *messages.Metadata, chunkMetadata *messages.Chun
 		strconv.Itoa(int(standardChunkSize)) + "," +
 		strconv.Itoa(int(actualChunkSize)) + "," +
 		checkSum + "," +
-		chunkCheckSum)
+		chunkCheckSum + "," +
+		strconv.FormatBool(isTextFile) + "," +
+		strconv.Itoa(int(offset)))
 
 	w := bufio.NewWriter(file)
 	w.Write(metadataBytes)
@@ -163,7 +171,7 @@ func WriteMetadataFile(metadata *messages.Metadata, chunkMetadata *messages.Chun
 
 func WriteChunk(fileMetadata *messages.Metadata, chunkMetadata *messages.ChunkMetadata, messageHandler *messages.MessageHandler, context context) {
 	conn := messageHandler.GetConn()
-	chunkName, _, _ := UnpackChunkMetadata(chunkMetadata)
+	chunkName, _, _, _ := UnpackChunkMetadata(chunkMetadata)
 	err := WriteMetadataFile(fileMetadata, chunkMetadata, context)
 	if err != nil {
 		log.Fatalln(err.Error())

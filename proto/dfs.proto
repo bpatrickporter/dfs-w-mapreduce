@@ -8,12 +8,14 @@ message Metadata {
     int32 num_chunks = 3;
     int32 chunk_size = 4;
     string check_sum = 5;
+    bool is_text_file = 6;
 }
 
 message ChunkMetadata {
     string chunk_name = 1;
     int32 chunk_size = 2;
     string chunk_check_sum = 3;
+    int32 offset = 4;
 }
 
 message Ack {

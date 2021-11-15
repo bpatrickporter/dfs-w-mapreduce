@@ -57,13 +57,18 @@ func InitializeLogger() {
 	log.Println("Client start up complete")
 }
 
-func GetMetadata(fileName string) (int, string) {
+func GetMetadata(fileName string) (int, string, bool) {
 	f, _ := os.Open(fileName)
 	defer f.Close()
 	fileInfo, _ := f.Stat()
 	fileSize := fileInfo.Size()
 	checkSum := messages.GetCheckSum(*f)
-	return int(fileSize), checkSum
+	isTextFile := IsTextFile(fileName)
+	return int(fileSize), checkSum, isTextFile
+}
+
+func IsTextFile(filename string) bool {
+	return true
 }
 
 func UnpackPutResponse(msg *messages.Wrapper_PutResponseMessage) (bool, []string, *messages.Metadata) {
@@ -106,11 +111,12 @@ func UnpackGetResponse(msg *messages.Wrapper_GetResponseMessage) (bool, []string
 
 func PackagePutRequest(fileName string) *messages.Wrapper {
 	log.Println("Put input received")
-	fileSize, checkSum := GetMetadata(fileName)
+	fileSize, checkSum, isTextFile := GetMetadata(fileName)
 	metadata := &messages.Metadata{
 		FileName: fileName,
 		FileSize: int32(fileSize),
-		CheckSum: checkSum}
+		CheckSum: checkSum,
+		IsTextFile: isTextFile}
 	msg := messages.PutRequest{
 		Metadata: metadata}
 	wrapper := &messages.Wrapper{
@@ -132,12 +138,13 @@ func PackageDeleteRequest(fileName string) *messages.Wrapper {
 	return wrapper
 }
 
-func PackagePutRequestChunk(currentChunk string, metadata *messages.Metadata, chunkCheckSum string, numBytes int, forwardingList []string) *messages.Wrapper {
+func PackagePutRequestChunk(currentChunk string, offset int, metadata *messages.Metadata, chunkCheckSum string, numBytes int, forwardingList []string) *messages.Wrapper {
 	fileMetadata := metadata
 	chunkMetadata := &messages.ChunkMetadata{
 		ChunkName: currentChunk,
 		ChunkSize: int32(numBytes),
-		ChunkCheckSum: chunkCheckSum}
+		ChunkCheckSum: chunkCheckSum,
+		Offset: int32(offset)}
 	msg := messages.PutRequest{
 		Metadata: fileMetadata,
 		ChunkMetadata: chunkMetadata,
@@ -147,8 +154,7 @@ func PackagePutRequestChunk(currentChunk string, metadata *messages.Metadata, ch
 			PutRequestMessage: &msg},
 	}
 	log.Println("Packaging chunk: " + currentChunk)
-	log.Println("Metadata: " + strconv.Itoa(int(msg.Metadata.ChunkSize)))
-	log.Println("ChunkMetadata: " + strconv.Itoa(int(msg.ChunkMetadata.ChunkSize)))
+	log.Println("ChunkSize: " + strconv.Itoa(int(msg.ChunkMetadata.ChunkSize)))
 	return wrapper
 }
 
@@ -265,7 +271,7 @@ func DeleteChunk(node string, wrapper *messages.Wrapper) {
 	}
 }
 
-func SendChunks(metadata *messages.Metadata, destinationNodes []string) {
+func SendByteChunks(metadata *messages.Metadata, destinationNodes []string) {
 	chunkToNodeListIndex := GetChunkIndex(metadata, destinationNodes)
 	f, err := os.Open(metadata.FileName)
 	if err != nil {
@@ -287,6 +293,7 @@ func SendChunks(metadata *messages.Metadata, destinationNodes []string) {
 		forwardingList := nodeList[1:]
 		wrapper := PackagePutRequestChunk(
 			currentChunk,
+			0,
 			metadata,
 			checkSum,
 			numBytes,
@@ -313,6 +320,91 @@ func SendChunks(metadata *messages.Metadata, destinationNodes []string) {
 		messageHandler.Close()
 	}
 	fmt.Println("File saved")
+}
+
+func SendLineChunks(metadata *messages.Metadata, destinationNodes []string) {
+	chunkToNodeListIndex := GetChunkIndex(metadata, destinationNodes)
+	f, err := os.Open(metadata.FileName)
+	if err != nil {
+		log.Fatalln(err.Error())
+	}
+	defer f.Close()
+	counter := 0
+	offset := 0
+
+	log.Println("Offset: " + strconv.Itoa(offset))
+	firstReader := bufio.NewReader(f)
+	eof := false
+
+	for {
+		chunk := make([]byte, 0)
+		for len(chunk) < int(metadata.ChunkSize) {
+			line, _, err := firstReader.ReadLine()
+			if err != nil {
+				log.Println("breaking")
+				log.Println(err.Error())
+				eof = true
+				break
+			}
+			line = append(line, '\n')
+			chunk = append(chunk, line...)
+		}
+		log.Println("First reader read: " + strconv.Itoa(len(chunk)))
+
+
+		checkSum := messages.GetChunkCheckSum(chunk)
+		currentChunkSize := len(chunk)
+		log.Println("Buffer size: " + strconv.Itoa(currentChunkSize))
+
+		currentChunk := strconv.Itoa(counter) + "_" + metadata.FileName
+		nodeList := chunkToNodeListIndex[currentChunk]
+
+		forwardingList := nodeList[1:]
+		wrapper := PackagePutRequestChunk(
+			currentChunk,
+			offset,
+			metadata,
+			checkSum,
+			currentChunkSize,
+			forwardingList)
+		var conn net.Conn
+		for {
+			if conn, err = net.Dial("tcp", nodeList[0]); err != nil {
+				log.Println("trying conn again" + nodeList[0])
+				time.Sleep(1000 * time.Millisecond)
+			} else {
+				break
+			}
+		}
+		messageHandler := messages.NewMessageHandler(conn)
+		messageHandler.Send(wrapper)
+		reader := bytes.NewReader(chunk)
+		writer := bufio.NewWriter(conn)
+		n, err := io.CopyN(writer, reader, int64(currentChunkSize))
+		if err != nil {
+			fmt.Print(err.Error())
+			break
+		}
+		log.Println("%d bytes found\n", currentChunkSize)
+		log.Println("%d bytes sent\n", n)
+		counter++
+		offset = offset + currentChunkSize
+		messageHandler.Close()
+		if eof {
+			break
+		}
+	}
+	fmt.Println("File saved")
+}
+
+func SendChunks(metadata *messages.Metadata, destinationNodes []string) {
+	if metadata.IsTextFile {
+		log.Println("Sending line chunks")
+		SendLineChunks(metadata, destinationNodes)
+	} else {
+		log.Println("Sending byte chunks")
+		SendByteChunks(metadata, destinationNodes)
+	}
 }
 
 func GetChunks(chunks []string, nodes []string, context context) {
@@ -346,11 +438,7 @@ func GetIndexAndFileName(chunkName string) (string, string) {
 func WriteChunk(chunkMetadata *messages.ChunkMetadata, fileMetadata *messages.Metadata, messageHandler *messages.MessageHandler) bool {
 	log.Println(chunkMetadata.ChunkName + " incoming")
 
-	index, fileName := GetIndexAndFileName(chunkMetadata.ChunkName)
-	i, err := strconv.Atoi(index)
-	if err != nil {
-		log.Fatalln(err.Error())
-	}
+	_, fileName := GetIndexAndFileName(chunkMetadata.ChunkName)
 
 	file, err := os.OpenFile("copy_" + fileName, os.O_CREATE|os.O_WRONLY, 0666)
 	defer file.Close()
@@ -360,6 +448,7 @@ func WriteChunk(chunkMetadata *messages.ChunkMetadata, fileMetadata *messages.Me
 
 	conn := messageHandler.GetConn()
 	buffer := make([]byte, chunkMetadata.ChunkSize)
+	log.Println("Chunk size: " + strconv.Itoa(len(buffer)))
 	numBytes, err := io.ReadFull(conn, buffer)
 	if err != nil {
 		log.Println(err.Error())
@@ -377,11 +466,12 @@ func WriteChunk(chunkMetadata *messages.ChunkMetadata, fileMetadata *messages.Me
 		corruptedFile = false
 	}
 
-	n, err := file.WriteAt(buffer, int64(i * int(fileMetadata.ChunkSize)))
+	n, err := file.WriteAt(buffer, int64(int(chunkMetadata.Offset)))
+	log.Println("Wrote to offset: " + strconv.Itoa(int(chunkMetadata.Offset)))
 	if err != nil {
 		log.Println(err.Error())
 	}
-	log.Println(chunkMetadata.ChunkName + "wrote " + strconv.Itoa(n) + " bytes to file")
+	log.Println(chunkMetadata.ChunkName + " wrote " + strconv.Itoa(n) + " bytes to file")
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
