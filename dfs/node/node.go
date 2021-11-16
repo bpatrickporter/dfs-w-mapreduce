@@ -72,7 +72,7 @@ func SendHeartBeats(context context) {
 			wrapper := PackageHeartBeat(hostname, context.listeningPort)
 			for {
 				messageHandler.Send(wrapper)
-				log.Println("Heart beat sent to controller")
+				//log.Println("Heart beat sent to controller")
 				time.Sleep(5 * time.Second)
 			}
 		}
@@ -209,7 +209,7 @@ func ReadChunk(fileMetadata *messages.Metadata, chunkMetadata *messages.ChunkMet
 
 func ReadJob(jobFile string, jobLength int, messageHandler *messages.MessageHandler, context context) {
 	log.Println("Reading job: " + jobFile)
-	file, err := os.OpenFile(context.rootDir+jobFile, os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0777)
+	file, err := os.OpenFile(context.rootDir + jobFile, os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0777)
 	defer file.Close()
 	if err != nil {
 		fmt.Println(err.Error())
@@ -234,11 +234,44 @@ func ReadJob(jobFile string, jobLength int, messageHandler *messages.MessageHand
 	log.Println("Wrote job: " + jobFile + " - " + strconv.Itoa(int(n)) + " bytes" )
 }
 
-func RunJob(chunk string, jobFile string, messageHandler *messages.MessageHandler, context context) {
-	log.Println("Ran job")
+func RunMapJob(chunk string, jobFile string, messageHandler *messages.MessageHandler, context context, reducerCandidates []string) {
+	log.Println("Running map job")
+	//run map job
+	//store temp results
+	//iterate temp results and send to reducers
+	//add reducers to reducer list
+	msg := messages.ReduceJobInput{}
+	wrapper := &messages.Wrapper{
+		Msg: &messages.Wrapper_ReduceJobInputMessage{
+			ReduceJobInputMessage: &msg,
+		},
+	}
+	for i := range reducerCandidates {
+		//send something to reducer
+		var conn net.Conn
+		var err error
+		for {
+			if conn, err = net.Dial("tcp", reducerCandidates[i]); err != nil {
+				log.Println("trying conn again" + reducerCandidates[i])
+				time.Sleep(1000 * time.Millisecond)
+			} else {
+				break
+			}
+		}
+		reducerMessageHandler := messages.NewMessageHandler(conn)
+		reducerMessageHandler.Send(wrapper)
+		reducerMessageHandler.Close()
+	}
+	//send ack to comp manager
+	msg2 := messages.MapCompleteAck{}
+	wrapper2 := &messages.Wrapper{
+		Msg: &messages.Wrapper_MapCompleteAckMessage{
+			MapCompleteAckMessage: &msg2,
+		},
+	}
+	messageHandler.Send(wrapper2)
+	log.Println("Map job complete: " + jobFile)
 }
-
-
 
 func DeleteChunk(chunkName string, context context) {
 	log.Println("Delete chunk request received for " + chunkName)
@@ -360,12 +393,35 @@ func HandleConnection(conn net.Conn, context context) {
 			ForwardChunk(metadata, chunkMetadata, forwardingList, context)
 			messageHandler.Close()
 			return
-		case *messages.Wrapper_JobRequestMessage:
-			chunk := msg.JobRequestMessage.ChunkName
-			job := msg.JobRequestMessage.JobFileName
-			jobSize := msg.JobRequestMessage.JobFileSize
+		case *messages.Wrapper_MapJobRequestMessage:
+			chunk := msg.MapJobRequestMessage.ChunkName
+			job := msg.MapJobRequestMessage.JobFileName
+			jobSize := msg.MapJobRequestMessage.JobFileSize
+			reducerCandidates := msg.MapJobRequestMessage.ReducerCandidates
 			ReadJob(job, int(jobSize), messageHandler, context)
-			RunJob(chunk, job, messageHandler, context)
+			RunMapJob(chunk, job, messageHandler, context, reducerCandidates)
+			messageHandler.Close()
+			return
+		case *messages.Wrapper_ReduceJobInputMessage:
+			log.Println("Reduce job input received")
+			log.Println("Saving results to disk and waiting for message from comp manager")
+			messageHandler.Close()
+			return
+		case *messages.Wrapper_ReduceJobRequestMessage:
+			jobId := msg.ReduceJobRequestMessage.JobId
+			fileName := msg.ReduceJobRequestMessage.JobFileName
+			log.Println("Reduce job request received: " + jobId + " - " + fileName)
+			log.Println("Sending response to client")
+			msg2 := messages.MapReduceJobResponse{
+				JobId: jobId,
+			}
+			wrapper2 := &messages.Wrapper{
+				Msg: &messages.Wrapper_MapReduceJobResponseMessage{
+					MapReduceJobResponseMessage: &msg2},
+			}
+			messageHandler.Send(wrapper2)
+			log.Println("Response sent to client")
+			return
 		case *messages.Wrapper_DeleteRequestMessage:
 			chunkName := msg.DeleteRequestMessage.FileName
 			DeleteChunk(chunkName, context)

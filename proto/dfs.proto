@@ -116,14 +116,30 @@ message CorruptFileNotice {
     string chunk = 2;
 }
 
-message JobRequest {
+message MapJobRequest {
     string chunk_name = 1;
     string job_file_name = 2;
     int32 job_file_size = 3;
+    repeated string reducer_candidates = 4;
+    string job_id = 5;
 }
 
-message JobResponse {
+message ReduceJobInput {
+    string job_id = 1;
+}
+
+message ReduceJobRequest {
+    string job_id = 1;
+    string job_file_name = 2;
+}
+
+message MapReduceJobResponse {
     repeated KeyValuePair results = 1;
+    string job_id = 2;
+}
+
+message MapCompleteAck {
+    string job_id = 1;
 }
 
 message Wrapper {
@@ -145,7 +161,10 @@ message Wrapper {
         CorruptFileNotice corrupt_file_notice_message = 15;
         ComputeRequest compute_request_message = 16;
         ComputeResponse compute_response_message = 17;
-        JobRequest job_request_message = 18;
-        JobResponse job_response_message = 19;
+        MapJobRequest map_job_request_message = 18;
+        ReduceJobInput reduce_job_input_message = 19;
+        MapReduceJobResponse map_reduce_job_response_message = 20;
+        MapCompleteAck map_complete_ack_message = 21;
+        ReduceJobRequest reduce_job_request_message = 22;
     }
 }

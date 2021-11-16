@@ -190,14 +190,15 @@ func PackageGetRequest(fileName string) *messages.Wrapper {
 	return wrapper
 }
 
-func PackageJobRequest(chunk string, jobFile string, jobLength int) *messages.Wrapper {
-	msg := messages.JobRequest{
+func PackageMapJobRequest(chunk string, jobFile string, jobLength int, nodes []string) *messages.Wrapper {
+	msg := messages.MapJobRequest{
 		ChunkName: chunk,
 		JobFileName: jobFile,
-		JobFileSize: int32(jobLength)}
+		JobFileSize: int32(jobLength),
+		ReducerCandidates: nodes}
 	wrapper := &messages.Wrapper{
-		Msg: &messages.Wrapper_JobRequestMessage{
-			JobRequestMessage: &msg},
+		Msg: &messages.Wrapper_MapJobRequestMessage{
+			MapJobRequestMessage: &msg},
 	}
 	return wrapper
 }
@@ -480,7 +481,7 @@ func SendJob(chunks []string, nodes []string, inputFile string, outputFile strin
 		chunk := chunks[i]
 		node := nodes[i]
 		jobLength := len(f)
-		wrapper := PackageJobRequest(chunk, jobFile, jobLength)
+		wrapper := PackageMapJobRequest(chunk, jobFile, jobLength, nodes)
 		conn, err := net.Dial("tcp", node)
 		if err != nil {
 			log.Fatalln(err.Error())
@@ -492,10 +493,19 @@ func SendJob(chunks []string, nodes []string, inputFile string, outputFile strin
 		_, err = io.CopyN(writer, reader, int64(jobLength))
 		log.Println("job sent")
 		wg.Add(1)
-		go HandleConnections(messageHandler, &wg, context, node)
+		go WaitForMappersToFinish(messageHandler, &wg, node)
 	}
 	wg.Wait()
-	fmt.Println("File downloaded")
+	fmt.Println("Map Phase Complete")
+	log.Println("Map Phase Complete")
+	InitiateReducePhase(nodes, jobFile)
+	//WaitForReducersToFinish
+	//kick off reducers--they already have the job file
+}
+
+func InitiateReducePhase(nodes []string, jobFile string) {
+	//send reducejobrequestmessages to all nodes
+	log.Println("Reduce phase begun")
 }
 
 func GetChunks(chunks []string, nodes []string, context context) {
@@ -585,6 +595,22 @@ func InitiateCorruptFileRecovery(chunk string, node string, context context) {
 	messageHandler.Close()
 }
 
+func WaitForMappersToFinish(messageHandler *messages.MessageHandler, waitGroup *sync.WaitGroup, node string) {
+	for {
+		wrapper, _ := messageHandler.Receive()
+
+		switch msg := wrapper.Msg.(type) {
+		case *messages.Wrapper_MapCompleteAckMessage:
+			defer waitGroup.Done()
+			jobId := msg.MapCompleteAckMessage.JobId
+			log.Println("Map job complete: " + jobId + " - " + node)
+			messageHandler.Close()
+			return
+		default:
+			continue
+		}
+	}
+}
 func HandleConnections(messageHandler *messages.MessageHandler, waitGroup *sync.WaitGroup, context context, node string) {
 	for {
 		wrapper, _ := messageHandler.Receive()
@@ -598,8 +624,6 @@ func HandleConnections(messageHandler *messages.MessageHandler, waitGroup *sync.
 				InitiateCorruptFileRecovery(chunkMetadata.ChunkName, node, context)
 			}
 			messageHandler.Close()
-			return
-		case *messages.Wrapper_JobResponseMessage:
 			return
 		default:
 			continue
