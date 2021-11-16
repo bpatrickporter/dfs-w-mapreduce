@@ -41,7 +41,7 @@ func InitializeLogger() {
 	var err error
 	if _, isOrion := IsHostOrion(); isOrion {
 		file, err = os.OpenFile(
-			"/home/bpporter/P1-patrick/dfs/logs/client_logs.txt",
+			"/home/bpporter/P2-pport/dfs/logs/client_logs.txt",
 			os.O_TRUNC|os.O_CREATE|os.O_WRONLY,
 			0666)
 	} else {
