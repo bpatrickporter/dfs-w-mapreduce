@@ -136,6 +136,7 @@ message ReduceJobRequest {
 message MapReduceJobResponse {
     repeated KeyValuePair results = 1;
     string job_id = 2;
+    bool job_found = 3;
 }
 
 message MapCompleteAck {

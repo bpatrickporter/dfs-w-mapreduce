@@ -190,12 +190,13 @@ func PackageGetRequest(fileName string) *messages.Wrapper {
 	return wrapper
 }
 
-func PackageMapJobRequest(chunk string, jobFile string, jobLength int, nodes []string) *messages.Wrapper {
+func PackageMapJobRequest(chunk string, jobFile string, jobLength int, nodes []string, jobId string) *messages.Wrapper {
 	msg := messages.MapJobRequest{
 		ChunkName: chunk,
 		JobFileName: jobFile,
 		JobFileSize: int32(jobLength),
-		ReducerCandidates: nodes}
+		ReducerCandidates: nodes,
+		JobId: jobId}
 	wrapper := &messages.Wrapper{
 		Msg: &messages.Wrapper_MapJobRequestMessage{
 			MapJobRequestMessage: &msg},
@@ -467,7 +468,7 @@ func SendChunks(metadata *messages.Metadata, destinationNodes []string) {
 	}
 }
 
-func SendJob(chunks []string, nodes []string, inputFile string, outputFile string, jobFile string, context context) {
+func InitiateMapPhase(chunks []string, nodes []string, jobFile string) string {
 	log.Println("Sending job")
 	var wg sync.WaitGroup
 
@@ -477,11 +478,13 @@ func SendJob(chunks []string, nodes []string, inputFile string, outputFile strin
 		log.Fatalln(err.Error())
 	}
 
+	jobLength := len(f)
+	jobId := strconv.Itoa(jobLength) + "_" + jobFile
+
 	for i := range chunks {
 		chunk := chunks[i]
 		node := nodes[i]
-		jobLength := len(f)
-		wrapper := PackageMapJobRequest(chunk, jobFile, jobLength, nodes)
+		wrapper := PackageMapJobRequest(chunk, jobFile, jobLength, nodes, jobId)
 		conn, err := net.Dial("tcp", node)
 		if err != nil {
 			log.Fatalln(err.Error())
@@ -498,14 +501,42 @@ func SendJob(chunks []string, nodes []string, inputFile string, outputFile strin
 	wg.Wait()
 	fmt.Println("Map Phase Complete")
 	log.Println("Map Phase Complete")
-	InitiateReducePhase(nodes, jobFile)
-	//WaitForReducersToFinish
-	//kick off reducers--they already have the job file
+	return jobId
 }
 
-func InitiateReducePhase(nodes []string, jobFile string) {
-	//send reducejobrequestmessages to all nodes
+func InitiateReducePhase(nodes []string, jobId string, jobFile string) {
 	log.Println("Reduce phase begun")
+	var wg sync.WaitGroup
+
+	msg := messages.ReduceJobRequest{
+		JobId: jobId,
+		JobFileName: jobFile,
+	}
+	wrapper := &messages.Wrapper{
+		Msg: &messages.Wrapper_ReduceJobRequestMessage{
+			ReduceJobRequestMessage: &msg,
+		},
+	}
+	for i := range nodes {
+		var conn net.Conn
+		var err error
+		for {
+			if conn, err = net.Dial("tcp", nodes[i]); err != nil {
+				log.Println("trying conn again" + nodes[i])
+				time.Sleep(1000 * time.Millisecond)
+			} else {
+				break
+			}
+		}
+		messageHandler := messages.NewMessageHandler(conn)
+		messageHandler.Send(wrapper)
+		log.Println("reduce notice sent")
+		wg.Add(1)
+		go WaitForReducersToFinish(messageHandler, &wg, nodes[i])
+	}
+	wg.Wait()
+	fmt.Println("Reduce Phase Complete")
+	log.Println("Reduce Phase Complete")
 }
 
 func GetChunks(chunks []string, nodes []string, context context) {
@@ -611,6 +642,30 @@ func WaitForMappersToFinish(messageHandler *messages.MessageHandler, waitGroup *
 		}
 	}
 }
+
+func WaitForReducersToFinish(messageHandler *messages.MessageHandler, waitGroup *sync.WaitGroup, node string) {
+	for {
+		wrapper, _ := messageHandler.Receive()
+
+		switch msg := wrapper.Msg.(type) {
+		case *messages.Wrapper_MapReduceJobResponseMessage:
+			defer waitGroup.Done()
+			jobId := msg.MapReduceJobResponseMessage.JobId
+			if jobFound := msg.MapReduceJobResponseMessage.JobFound; jobFound {
+				log.Println("Map job complete: " + jobId + " - " + node)
+				log.Println("Saving results to temp file")
+				//append results to temp file
+			} else {
+				log.Println("No job found on " + node + " for job ID " + jobId)
+			}
+			messageHandler.Close()
+			return
+		default:
+			continue
+		}
+	}
+}
+
 func HandleConnections(messageHandler *messages.MessageHandler, waitGroup *sync.WaitGroup, context context, node string) {
 	for {
 		wrapper, _ := messageHandler.Receive()
@@ -674,8 +729,10 @@ func HandleConnection(messageHandler *messages.MessageHandler, context context) 
 			inputFileExists, chunks, nodes, input, output, job := UnpackComputeResponse(msg)
 			log.Println("job: " + job)
 			if inputFileExists {
-				SendJob(chunks, nodes, input, output, job, context)
+				jobId := InitiateMapPhase(chunks, nodes, job)
+				InitiateReducePhase(nodes, jobId, input)
 				//save results in dfs
+				log.Println("Sending map reduce results to DFS as " + output)
 			}
 			return
 		default:

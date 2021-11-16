@@ -234,7 +234,7 @@ func ReadJob(jobFile string, jobLength int, messageHandler *messages.MessageHand
 	log.Println("Wrote job: " + jobFile + " - " + strconv.Itoa(int(n)) + " bytes" )
 }
 
-func RunMapJob(chunk string, jobFile string, messageHandler *messages.MessageHandler, context context, reducerCandidates []string) {
+func RunMapJob(chunk string, jobFile string, messageHandler *messages.MessageHandler, context context, reducerCandidates []string, jobId string) {
 	log.Println("Running map job")
 	//run map job
 	//store temp results
@@ -263,7 +263,9 @@ func RunMapJob(chunk string, jobFile string, messageHandler *messages.MessageHan
 		reducerMessageHandler.Close()
 	}
 	//send ack to comp manager
-	msg2 := messages.MapCompleteAck{}
+	msg2 := messages.MapCompleteAck{
+		JobId: jobId,
+	}
 	wrapper2 := &messages.Wrapper{
 		Msg: &messages.Wrapper_MapCompleteAckMessage{
 			MapCompleteAckMessage: &msg2,
@@ -398,8 +400,9 @@ func HandleConnection(conn net.Conn, context context) {
 			job := msg.MapJobRequestMessage.JobFileName
 			jobSize := msg.MapJobRequestMessage.JobFileSize
 			reducerCandidates := msg.MapJobRequestMessage.ReducerCandidates
+			jobId := msg.MapJobRequestMessage.JobId
 			ReadJob(job, int(jobSize), messageHandler, context)
-			RunMapJob(chunk, job, messageHandler, context, reducerCandidates)
+			RunMapJob(chunk, job, messageHandler, context, reducerCandidates, jobId)
 			messageHandler.Close()
 			return
 		case *messages.Wrapper_ReduceJobInputMessage:
@@ -412,8 +415,10 @@ func HandleConnection(conn net.Conn, context context) {
 			fileName := msg.ReduceJobRequestMessage.JobFileName
 			log.Println("Reduce job request received: " + jobId + " - " + fileName)
 			log.Println("Sending response to client")
+			//check if file exists, run reduce job
 			msg2 := messages.MapReduceJobResponse{
 				JobId: jobId,
+				JobFound: true,
 			}
 			wrapper2 := &messages.Wrapper{
 				Msg: &messages.Wrapper_MapReduceJobResponseMessage{
