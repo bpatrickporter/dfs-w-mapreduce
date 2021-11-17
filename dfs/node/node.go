@@ -9,6 +9,7 @@ import (
 	"log"
 	"net"
 	"os"
+	"os/exec"
 	"strconv"
 	"strings"
 	"time"
@@ -183,33 +184,35 @@ func ReadChunk(fileMetadata *messages.Metadata, chunkMetadata *messages.ChunkMet
 		fmt.Println(err.Error())
 		log.Println(err.Error())
 	}
-	log.Println("writiing " + chunkName)
+	//log.Println("writing " + chunkName)
 
 	writer := bufio.NewWriter(file)
 	buffer := make([]byte, chunkMetadata.ChunkSize)
-	numBytes, err := io.ReadFull(conn, buffer)
+	//numBytes, err := io.ReadFull(conn, buffer)
+	_, err = io.ReadFull(conn, buffer)
 	if err != nil {
 		log.Println(err.Error())
 	}
-	log.Println(chunkMetadata.ChunkName + " read " + strconv.Itoa(numBytes) + " bytes from connection")
+	//log.Println(chunkMetadata.ChunkName + " read " + strconv.Itoa(numBytes) + " bytes from connection")
 
-	log.Println(chunkMetadata.ChunkName + "expecting chunkSize of" + strconv.Itoa(int(chunkMetadata.ChunkSize)))
-	checkSum := messages.GetChunkCheckSum(buffer[:chunkMetadata.ChunkSize])
-	oldCheckSum := chunkMetadata.ChunkCheckSum
-	log.Println(chunkMetadata.ChunkName + " New Checksum: " + checkSum)
-	log.Println(chunkMetadata.ChunkName + " Old Checksum: " + oldCheckSum)
+	//log.Println(chunkMetadata.ChunkName + "expecting chunkSize of" + strconv.Itoa(int(chunkMetadata.ChunkSize)))
+	//checkSum := messages.GetChunkCheckSum(buffer[:chunkMetadata.ChunkSize])
+	//oldCheckSum := chunkMetadata.ChunkCheckSum
+	//log.Println(chunkMetadata.ChunkName + " New Checksum: " + checkSum)
+	//log.Println(chunkMetadata.ChunkName + " Old Checksum: " + oldCheckSum)
 
 	reader := bytes.NewReader(buffer)
-	n, err := io.CopyN(writer, reader, int64(chunkMetadata.ChunkSize))
+	//n, err := io.CopyN(writer, reader, int64(chunkMetadata.ChunkSize))
+	_, err = io.CopyN(writer, reader, int64(chunkMetadata.ChunkSize))
 	if err != nil {
 		log.Println(err.Error())
 	}
-	log.Println(chunkMetadata.ChunkName + " wrote " + strconv.Itoa(int(n)) + " bytes to file")
+	//log.Println(chunkMetadata.ChunkName + " wrote " + strconv.Itoa(int(n)) + " bytes to file")
 }
 
 func ReadJob(jobFile string, jobLength int, messageHandler *messages.MessageHandler, context context) {
 	log.Println("Reading job: " + jobFile)
-	file, err := os.OpenFile(context.rootDir + jobFile, os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0777)
+	file, err := os.OpenFile(context.rootDir + jobFile + context.listeningPort, os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0777)
 	defer file.Close()
 	if err != nil {
 		fmt.Println(err.Error())
@@ -236,10 +239,16 @@ func ReadJob(jobFile string, jobLength int, messageHandler *messages.MessageHand
 
 func RunMapJob(chunk string, jobFile string, messageHandler *messages.MessageHandler, context context, reducerCandidates []string, jobId string) {
 	log.Println("Running map job")
-	//run map job
-	//store temp results
-	//iterate temp results and send to reducers
-	//add reducers to reducer list
+	i, _ := strconv.Atoi(context.listeningPort)
+	port := strconv.Itoa(i + 10)
+	cmd := exec.Command(context.rootDir + jobFile + context.listeningPort, "map", port, jobId, chunk)
+	cmd.Start()
+
+	log.Println("Ran job with args: " + context.rootDir + jobFile + context.listeningPort + " map " + port + " " + jobId + " " + chunk)
+	WaitForMapperToFinish(port)
+	log.Println("Map job finished")
+	/*
+
 	msg := messages.ReduceJobInput{}
 	wrapper := &messages.Wrapper{
 		Msg: &messages.Wrapper_ReduceJobInputMessage{
@@ -262,6 +271,8 @@ func RunMapJob(chunk string, jobFile string, messageHandler *messages.MessageHan
 		reducerMessageHandler.Send(wrapper)
 		reducerMessageHandler.Close()
 	}
+
+	 */
 	//send ack to comp manager
 	msg2 := messages.MapCompleteAck{
 		JobId: jobId,
@@ -273,6 +284,31 @@ func RunMapJob(chunk string, jobFile string, messageHandler *messages.MessageHan
 	}
 	messageHandler.Send(wrapper2)
 	log.Println("Map job complete: " + jobFile)
+}
+
+func WaitForMapperToFinish(port string) {
+	listener, err := net.Listen("tcp", ":" + port)
+	if err != nil {
+		log.Fatalln(err.Error())
+	}
+	log.Println("Waiting for map ack on port " + port)
+	for {
+		if conn, err := listener.Accept(); err == nil {
+			messageHandler := messages.NewMessageHandler(conn)
+
+			for {
+				request, _ := messageHandler.Receive()
+				switch msg := request.Msg.(type) {
+				case *messages.Wrapper_MapCompleteAckMessage:
+					jobId := msg.MapCompleteAckMessage.JobId
+					log.Println(jobId + ": mapper complete ack received")
+					return
+				default:
+					continue
+				}
+			}
+		}
+	}
 }
 
 func DeleteChunk(chunkName string, context context) {
@@ -405,6 +441,8 @@ func HandleConnection(conn net.Conn, context context) {
 			RunMapJob(chunk, job, messageHandler, context, reducerCandidates, jobId)
 			messageHandler.Close()
 			return
+		case *messages.Wrapper_MapCompleteAckMessage:
+			//InititateShufflePhase()
 		case *messages.Wrapper_ReduceJobInputMessage:
 			log.Println("Reduce job input received")
 			log.Println("Saving results to disk and waiting for message from comp manager")

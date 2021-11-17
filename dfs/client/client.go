@@ -726,11 +726,11 @@ func HandleConnection(messageHandler *messages.MessageHandler, context context) 
 			return
 		case *messages.Wrapper_ComputeResponseMessage:
 			log.Println("Compute response received")
-			inputFileExists, chunks, nodes, input, output, job := UnpackComputeResponse(msg)
+			inputFileExists, chunks, nodes, _, output, job := UnpackComputeResponse(msg)
 			log.Println("job: " + job)
 			if inputFileExists {
-				jobId := InitiateMapPhase(chunks, nodes, job)
-				InitiateReducePhase(nodes, jobId, input)
+				_ = InitiateMapPhase(chunks, nodes, job)
+				//InitiateReducePhase(nodes, jobId, input)
 				//save results in dfs
 				log.Println("Sending map reduce results to DFS as " + output)
 			}
