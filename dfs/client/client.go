@@ -729,6 +729,7 @@ func HandleConnection(messageHandler *messages.MessageHandler, context context) 
 			inputFileExists, chunks, nodes, _, output, job := UnpackComputeResponse(msg)
 			log.Println("job: " + job)
 			if inputFileExists {
+				//iniatemapphase doesn't return until receiving all acks
 				_ = InitiateMapPhase(chunks, nodes, job)
 				//InitiateReducePhase(nodes, jobId, input)
 				//save results in dfs

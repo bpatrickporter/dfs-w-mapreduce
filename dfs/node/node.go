@@ -210,9 +210,10 @@ func ReadChunk(fileMetadata *messages.Metadata, chunkMetadata *messages.ChunkMet
 	//log.Println(chunkMetadata.ChunkName + " wrote " + strconv.Itoa(int(n)) + " bytes to file")
 }
 
-func ReadJob(jobFile string, jobLength int, messageHandler *messages.MessageHandler, context context) {
+func ReadJob(jobFile string, jobLength int, messageHandler *messages.MessageHandler, context context) string {
 	log.Println("Reading job: " + jobFile)
-	file, err := os.OpenFile(context.rootDir + jobFile + context.listeningPort, os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0777)
+	executableFilePath := context.rootDir + jobFile + context.listeningPort
+	file, err := os.OpenFile(executableFilePath, os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0777)
 	defer file.Close()
 	if err != nil {
 		fmt.Println(err.Error())
@@ -235,44 +236,59 @@ func ReadJob(jobFile string, jobLength int, messageHandler *messages.MessageHand
 		log.Println(err.Error())
 	}
 	log.Println("Wrote job: " + jobFile + " - " + strconv.Itoa(int(n)) + " bytes" )
+	return executableFilePath
 }
 
-func RunMapJob(chunk string, jobFile string, messageHandler *messages.MessageHandler, context context, reducerCandidates []string, jobId string) {
+func RunMapJob(chunk string, context context, jobId string, executableFilePath string) string {
 	log.Println("Running map job")
-	i, _ := strconv.Atoi(context.listeningPort)
-	port := strconv.Itoa(i + 10)
-	cmd := exec.Command(context.rootDir + jobFile + context.listeningPort, "map", port, jobId, chunk)
+	listeningPortAsInt, _ := strconv.Atoi(context.listeningPort)
+	ackPort := strconv.Itoa(listeningPortAsInt + 10)
+	function := "map"
+	resultsFilePath := context.rootDir + "_" + function + "_results_" + jobId
+	cmd := exec.Command(executableFilePath, function, ackPort, chunk, resultsFilePath, jobId, context.listeningPort)
 	cmd.Start()
 
-	log.Println("Ran job with args: " + context.rootDir + jobFile + context.listeningPort + " map " + port + " " + jobId + " " + chunk)
-	WaitForMapperToFinish(port)
+	log.Println("Ran job with args: " +
+		executableFilePath + " " +
+		function + " " +
+		ackPort + " " +
+		chunk + " " +
+		resultsFilePath + " " +
+		jobId + " " +
+		context.listeningPort)
+	WaitForMapperToFinish(ackPort)
 	log.Println("Map job finished")
+	return resultsFilePath
+}
+
+func ShuffleResults(resultsFilePath string, jobId string, messageHandler *messages.MessageHandler, reducerCandidates []string) {
+	log.Println("Sending output to reducers")
 	/*
 
-	msg := messages.ReduceJobInput{}
-	wrapper := &messages.Wrapper{
-		Msg: &messages.Wrapper_ReduceJobInputMessage{
-			ReduceJobInputMessage: &msg,
-		},
-	}
-	for i := range reducerCandidates {
-		//send something to reducer
-		var conn net.Conn
-		var err error
-		for {
-			if conn, err = net.Dial("tcp", reducerCandidates[i]); err != nil {
-				log.Println("trying conn again" + reducerCandidates[i])
-				time.Sleep(1000 * time.Millisecond)
-			} else {
-				break
-			}
+		msg := messages.ReduceJobInput{}
+		wrapper := &messages.Wrapper{
+			Msg: &messages.Wrapper_ReduceJobInputMessage{
+				ReduceJobInputMessage: &msg,
+			},
 		}
-		reducerMessageHandler := messages.NewMessageHandler(conn)
-		reducerMessageHandler.Send(wrapper)
-		reducerMessageHandler.Close()
-	}
+		for i := range reducerCandidates {
+			//send something to reducer
+			var conn net.Conn
+			var err error
+			for {
+				if conn, err = net.Dial("tcp", reducerCandidates[i]); err != nil {
+					log.Println("trying conn again" + reducerCandidates[i])
+					time.Sleep(1000 * time.Millisecond)
+				} else {
+					break
+				}
+			}
+			reducerMessageHandler := messages.NewMessageHandler(conn)
+			reducerMessageHandler.Send(wrapper)
+			reducerMessageHandler.Close()
+		}
 
-	 */
+	*/
 	//send ack to comp manager
 	msg2 := messages.MapCompleteAck{
 		JobId: jobId,
@@ -283,7 +299,7 @@ func RunMapJob(chunk string, jobFile string, messageHandler *messages.MessageHan
 		},
 	}
 	messageHandler.Send(wrapper2)
-	log.Println("Map job complete: " + jobFile)
+	log.Println("Map job complete: " + jobId)
 }
 
 func WaitForMapperToFinish(port string) {
@@ -437,12 +453,11 @@ func HandleConnection(conn net.Conn, context context) {
 			jobSize := msg.MapJobRequestMessage.JobFileSize
 			reducerCandidates := msg.MapJobRequestMessage.ReducerCandidates
 			jobId := msg.MapJobRequestMessage.JobId
-			ReadJob(job, int(jobSize), messageHandler, context)
-			RunMapJob(chunk, job, messageHandler, context, reducerCandidates, jobId)
+			executableFilePath := ReadJob(job, int(jobSize), messageHandler, context)
+			resultsFilePath := RunMapJob(chunk, context, jobId, executableFilePath)
+			ShuffleResults(resultsFilePath, jobId, messageHandler, reducerCandidates)
 			messageHandler.Close()
 			return
-		case *messages.Wrapper_MapCompleteAckMessage:
-			//InititateShufflePhase()
 		case *messages.Wrapper_ReduceJobInputMessage:
 			log.Println("Reduce job input received")
 			log.Println("Saving results to disk and waiting for message from comp manager")
