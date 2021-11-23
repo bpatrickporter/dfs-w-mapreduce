@@ -126,6 +126,7 @@ message MapJobRequest {
 
 message ReduceJobInput {
     string job_id = 1;
+    int32 input_bytes = 2;
 }
 
 message ReduceJobRequest {

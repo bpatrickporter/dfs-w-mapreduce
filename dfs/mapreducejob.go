@@ -107,7 +107,7 @@ type keyValuePair struct {
 func main() {
 	delimiter := []byte(" <--> ")
 	function, ackPort, chunkName, resultsFilePath, jobId, nodeListeningPort := HandleArgs()
-	file, _ := os.OpenFile(resultsFilePath + nodeListeningPort, os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0666)
+	file, _ := os.OpenFile(resultsFilePath, os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0666)
 	defer file.Close()
 	writer := io.Writer(file)
 
@@ -130,8 +130,6 @@ func main() {
 			for i := range keyValuePairs {
 				result := append(keyValuePairs[i].key, delimiter...)
 				result = append(result, keyValuePairs[i].value...)
-				//writer.Write(result)
-				//writer.Write(newLine)
 				result = append(result, newLine...)
 				results = append(results, result...)
 			}

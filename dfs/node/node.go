@@ -3,10 +3,13 @@ package main
 import (
 	"bufio"
 	"bytes"
+	"crypto/md5"
 	"dfs/messages"
+	"encoding/binary"
 	"fmt"
 	"io"
 	"log"
+	"math"
 	"net"
 	"os"
 	"os/exec"
@@ -184,30 +187,19 @@ func ReadChunk(fileMetadata *messages.Metadata, chunkMetadata *messages.ChunkMet
 		fmt.Println(err.Error())
 		log.Println(err.Error())
 	}
-	//log.Println("writing " + chunkName)
 
 	writer := bufio.NewWriter(file)
 	buffer := make([]byte, chunkMetadata.ChunkSize)
-	//numBytes, err := io.ReadFull(conn, buffer)
 	_, err = io.ReadFull(conn, buffer)
 	if err != nil {
 		log.Println(err.Error())
 	}
-	//log.Println(chunkMetadata.ChunkName + " read " + strconv.Itoa(numBytes) + " bytes from connection")
-
-	//log.Println(chunkMetadata.ChunkName + "expecting chunkSize of" + strconv.Itoa(int(chunkMetadata.ChunkSize)))
-	//checkSum := messages.GetChunkCheckSum(buffer[:chunkMetadata.ChunkSize])
-	//oldCheckSum := chunkMetadata.ChunkCheckSum
-	//log.Println(chunkMetadata.ChunkName + " New Checksum: " + checkSum)
-	//log.Println(chunkMetadata.ChunkName + " Old Checksum: " + oldCheckSum)
 
 	reader := bytes.NewReader(buffer)
-	//n, err := io.CopyN(writer, reader, int64(chunkMetadata.ChunkSize))
 	_, err = io.CopyN(writer, reader, int64(chunkMetadata.ChunkSize))
 	if err != nil {
 		log.Println(err.Error())
 	}
-	//log.Println(chunkMetadata.ChunkName + " wrote " + strconv.Itoa(int(n)) + " bytes to file")
 }
 
 func ReadJob(jobFile string, jobLength int, messageHandler *messages.MessageHandler, context context) string {
@@ -226,7 +218,6 @@ func ReadJob(jobFile string, jobLength int, messageHandler *messages.MessageHand
 	numBytes, err := io.ReadFull(conn, buffer)
 	if err != nil {
 		log.Println(err.Error())
-
 	}
 	log.Println("Read job: " + jobFile + " - " + strconv.Itoa(numBytes) + " bytes")
 
@@ -244,7 +235,7 @@ func RunMapJob(chunk string, context context, jobId string, executableFilePath s
 	listeningPortAsInt, _ := strconv.Atoi(context.listeningPort)
 	ackPort := strconv.Itoa(listeningPortAsInt + 10)
 	function := "map"
-	resultsFilePath := context.rootDir + "_" + function + "_results_" + jobId
+	resultsFilePath := context.rootDir + "_" + function + "_results_" + jobId + context.listeningPort
 	cmd := exec.Command(executableFilePath, function, ackPort, chunk, resultsFilePath, jobId, context.listeningPort)
 	cmd.Start()
 
@@ -261,44 +252,80 @@ func RunMapJob(chunk string, context context, jobId string, executableFilePath s
 	return resultsFilePath
 }
 
+func FindReducer(key []byte, numReducers int) int {
+	hash := md5.Sum(key)
+	a := math.Abs(float64(binary.BigEndian.Uint64(hash[:])))
+	b := math.Abs(float64(int64(a) % int64(numReducers)))
+	return int(b)
+}
+
 func ShuffleResults(resultsFilePath string, jobId string, messageHandler *messages.MessageHandler, reducerCandidates []string) {
 	log.Println("Sending output to reducers")
-	/*
+	numReducers := len(reducerCandidates)
+	log.Println("Number of reducer candidates: " + strconv.Itoa(numReducers))
+	resultBuckets := make([][]byte, numReducers)
+	newLine := []byte{'\n'}
+	delimiter := []byte(" <--> ")
 
-		msg := messages.ReduceJobInput{}
+	mapperResults, err := os.ReadFile(resultsFilePath)
+	if err != nil {
+		log.Fatalln(err.Error())
+	}
+	keyValuePairs := bytes.Split(mapperResults, newLine)
+	shuffleCompletionPercentage := 0
+	total := len(keyValuePairs)
+	for i := range keyValuePairs {
+		keyValuePair := bytes.Split(keyValuePairs[i], delimiter)
+		key := keyValuePair[0]
+		reducer := FindReducer(key, numReducers)
+		reducerInput := append(keyValuePairs[i], newLine...)
+		resultBuckets[reducer] = append(resultBuckets[reducer], reducerInput...)
+		newPercentage := (i * 100) / total
+		if newPercentage > shuffleCompletionPercentage {
+			shuffleCompletionPercentage++
+			fmt.Println("Shuffle Status: " + strconv.Itoa(shuffleCompletionPercentage) + "%")
+		}
+	}
+	fmt.Println("Shuffle Status: 100%")
+
+	for j := range reducerCandidates {
+		var conn net.Conn
+		var err error
+		for {
+			if conn, err = net.Dial("tcp", reducerCandidates[j]); err != nil {
+				log.Println("trying conn again" + reducerCandidates[j])
+				time.Sleep(1000 * time.Millisecond)
+			} else {
+				break
+			}
+		}
+		log.Println("Sending map results to: " + reducerCandidates[j])
+
+		reducerMessageHandler := messages.NewMessageHandler(conn)
+		msg := messages.ReduceJobInput{
+			JobId: jobId,
+			InputBytes: int32(len(resultBuckets[j])),
+		}
 		wrapper := &messages.Wrapper{
 			Msg: &messages.Wrapper_ReduceJobInputMessage{
 				ReduceJobInputMessage: &msg,
 			},
 		}
-		for i := range reducerCandidates {
-			//send something to reducer
-			var conn net.Conn
-			var err error
-			for {
-				if conn, err = net.Dial("tcp", reducerCandidates[i]); err != nil {
-					log.Println("trying conn again" + reducerCandidates[i])
-					time.Sleep(1000 * time.Millisecond)
-				} else {
-					break
-				}
-			}
-			reducerMessageHandler := messages.NewMessageHandler(conn)
-			reducerMessageHandler.Send(wrapper)
-			reducerMessageHandler.Close()
-		}
+		reducerMessageHandler.Send(wrapper)
+		conn.Write(resultBuckets[j])
+		log.Println("Results sent to reducer")
+		reducerMessageHandler.Close()
+	}
 
-	*/
-	//send ack to comp manager
-	msg2 := messages.MapCompleteAck{
+	ackMsg := messages.MapCompleteAck{
 		JobId: jobId,
 	}
-	wrapper2 := &messages.Wrapper{
+	ackWrapper := &messages.Wrapper{
 		Msg: &messages.Wrapper_MapCompleteAckMessage{
-			MapCompleteAckMessage: &msg2,
+			MapCompleteAckMessage: &ackMsg,
 		},
 	}
-	messageHandler.Send(wrapper2)
+	messageHandler.Send(ackWrapper)
 	log.Println("Map job complete: " + jobId)
 }
 
@@ -434,6 +461,32 @@ func PackageGetResponseChunk(chunkMetadata *messages.ChunkMetadata, fileMetadata
 	return wrapper
 }
 
+func SaveReduceJobInput(messageHandler *messages.MessageHandler, jobId string, inputBytes int, context context) {
+	conn := messageHandler.GetConn()
+	fileName := context.rootDir + "_reduce_inputs_" + jobId + "_" + context.listeningPort
+	file, err := os.OpenFile(fileName, os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0666)
+	defer file.Close()
+	if err != nil {
+		fmt.Println(err.Error())
+		log.Println(err.Error())
+	}
+
+	writer := bufio.NewWriter(file)
+	buffer := make([]byte, inputBytes)
+	numBytes, err := io.ReadFull(conn, buffer)
+	if err != nil {
+		log.Println(err.Error())
+	}
+	log.Println("Read reduce job input: " + jobId + " - " + strconv.Itoa(numBytes) + " bytes")
+
+	reader := bytes.NewReader(buffer)
+	n, err := io.CopyN(writer, reader, int64(inputBytes))
+	if err != nil {
+		log.Println(err.Error())
+	}
+	log.Println("Wrote reduce job input: " + jobId + " - " + strconv.Itoa(int(n)) + " bytes" )
+}
+
 func HandleConnection(conn net.Conn, context context) {
 	messageHandler := messages.NewMessageHandler(conn)
 	for {
@@ -459,8 +512,11 @@ func HandleConnection(conn net.Conn, context context) {
 			messageHandler.Close()
 			return
 		case *messages.Wrapper_ReduceJobInputMessage:
-			log.Println("Reduce job input received")
+			jobId := msg.ReduceJobInputMessage.JobId
+			inputBytes := msg.ReduceJobInputMessage.InputBytes
+			log.Println("Reduce job input received: " + jobId)
 			log.Println("Saving results to disk and waiting for message from comp manager")
+			SaveReduceJobInput(messageHandler, jobId, int(inputBytes), context)
 			messageHandler.Close()
 			return
 		case *messages.Wrapper_ReduceJobRequestMessage:
