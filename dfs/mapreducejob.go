@@ -118,6 +118,7 @@ func main() {
 		newLine := []byte{'\n'}
 
 		counter := 0
+		results := make([]byte, 0)
 		for {
 			line, _, err := reader.ReadLine()
 
@@ -129,11 +130,14 @@ func main() {
 			for i := range keyValuePairs {
 				result := append(keyValuePairs[i].key, delimiter...)
 				result = append(result, keyValuePairs[i].value...)
-				writer.Write(result)
-				writer.Write(newLine)
+				//writer.Write(result)
+				//writer.Write(newLine)
+				result = append(result, newLine...)
+				results = append(results, result...)
 			}
 			counter++
 		}
+		writer.Write(results)
 		SendMapCompleteAck(ackPort, jobId)
 	} else if function == "reduce" {
 
