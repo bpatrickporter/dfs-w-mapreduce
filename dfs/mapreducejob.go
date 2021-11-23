@@ -2,17 +2,26 @@ package main
 
 import (
 	"bufio"
-	"bytes"
 	"dfs/messages"
 	"io"
 	"log"
 	"net"
 	"os"
+	"strings"
 	"time"
 )
 
-func mapper() {
-	return
+func mapper(lineNumber int, line []byte) []keyValuePair {
+	words := strings.Fields(string(line))
+	results := make([]keyValuePair, 0)
+	for i := range words {
+		result := keyValuePair{
+			key: []byte(words[i]),
+			value: []byte("1"),
+		}
+		results = append(results, result)
+	}
+	return results
 }
 
 func reducer() {
@@ -90,22 +99,46 @@ func HandleArgs() (string, string, string, string, string, string) {
 	return function, ackPort, chunkName, resultsFilePath, jobId, nodeListeningPort
 }
 
+type keyValuePair struct {
+	key []byte
+	value []byte
+}
+
 func main() {
-	_, ackPort, chunkName, resultsFilePath, jobId, nodeListeningPort := HandleArgs()
-	file, _ := os.OpenFile(resultsFilePath, os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0666)
-	writer := bufio.NewWriter(file)
+	delimiter := []byte(" <--> ")
+	function, ackPort, chunkName, resultsFilePath, jobId, nodeListeningPort := HandleArgs()
+	file, _ := os.OpenFile(resultsFilePath + nodeListeningPort, os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0666)
+	defer file.Close()
+	writer := io.Writer(file)
 
 	//send get request and wait for response
-	con, chunkSize := GetChunkConn(chunkName, nodeListeningPort)
-	buffer := make([]byte, chunkSize)
-	io.ReadFull(con, buffer)
-	reader := bytes.NewReader(buffer)
-	io.CopyN(writer, reader, int64(chunkSize))
+	if function == "map" {
+		con, _ := GetChunkConn(chunkName, nodeListeningPort)
+		reader := bufio.NewReader(con)
+		newLine := []byte{'\n'}
 
-	//writer.WriteString(function)
-	//
-	//writer.Flush()
-	file.Close()
+		counter := 0
+		for {
+			line, _, err := reader.ReadLine()
 
-	SendMapCompleteAck(ackPort, jobId)
+			if err == io.EOF {
+				break
+			}
+			keyValuePairs := mapper(counter, line)
+
+			for i := range keyValuePairs {
+				result := append(keyValuePairs[i].key, delimiter...)
+				result = append(result, keyValuePairs[i].value...)
+				writer.Write(result)
+				writer.Write(newLine)
+			}
+			counter++
+		}
+		SendMapCompleteAck(ackPort, jobId)
+	} else if function == "reduce" {
+
+	} else {
+
+	}
+
 }
