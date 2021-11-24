@@ -132,15 +132,22 @@ message ReduceJobInput {
 message ReduceJobRequest {
     string job_id = 1;
     string job_file_name = 2;
+    string output_file = 3;
 }
 
 message MapReduceJobResponse {
     repeated KeyValuePair results = 1;
     string job_id = 2;
     bool job_found = 3;
+    string output_file = 4;
+    int32 result_size = 5;
 }
 
 message MapCompleteAck {
+    string job_id = 1;
+}
+
+message ReducerCompleteAck {
     string job_id = 1;
 }
 
@@ -167,6 +174,7 @@ message Wrapper {
         ReduceJobInput reduce_job_input_message = 19;
         MapReduceJobResponse map_reduce_job_response_message = 20;
         MapCompleteAck map_complete_ack_message = 21;
-        ReduceJobRequest reduce_job_request_message = 22;
+        ReducerCompleteAck reducer_complete_ack_message = 22;
+        ReduceJobRequest reduce_job_request_message = 23;
     }
 }

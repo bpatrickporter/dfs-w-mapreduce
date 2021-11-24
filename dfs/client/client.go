@@ -504,13 +504,14 @@ func InitiateMapPhase(chunks []string, nodes []string, jobFile string) string {
 	return jobId
 }
 
-func InitiateReducePhase(nodes []string, jobId string, jobFile string) {
+func InitiateReducePhase(nodes []string, jobId string, jobFile string, outputFile string, context context) {
 	log.Println("Reduce phase begun")
 	var wg sync.WaitGroup
 
 	msg := messages.ReduceJobRequest{
 		JobId: jobId,
 		JobFileName: jobFile,
+		OutputFile: outputFile,
 	}
 	wrapper := &messages.Wrapper{
 		Msg: &messages.Wrapper_ReduceJobRequestMessage{
@@ -532,11 +533,26 @@ func InitiateReducePhase(nodes []string, jobId string, jobFile string) {
 		messageHandler.Send(wrapper)
 		log.Println("reduce notice sent")
 		wg.Add(1)
-		go WaitForReducersToFinish(messageHandler, &wg, nodes[i])
+		go WaitForReducersToFinish(messageHandler, &wg, nodes[i], context)
 	}
 	wg.Wait()
 	fmt.Println("Reduce Phase Complete")
 	log.Println("Reduce Phase Complete")
+}
+
+func ReceiveResults(messageHandler *messages.MessageHandler, outputFile string, fileSize int) {
+	file, err := os.OpenFile(outputFile, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0666)
+	if err != nil {
+		log.Fatalln(err.Error())
+	}
+	defer file.Close()
+	conn := messageHandler.GetConn()
+	writer := bufio.NewWriter(file)
+	n, err := io.CopyN(writer, conn, int64(fileSize))
+	if err != nil {
+		log.Println(err.Error())
+	}
+	log.Println("Wrote result: " + outputFile + " - " + strconv.Itoa(int(n)) + " bytes" )
 }
 
 func GetChunks(chunks []string, nodes []string, context context) {
@@ -643,7 +659,7 @@ func WaitForMappersToFinish(messageHandler *messages.MessageHandler, waitGroup *
 	}
 }
 
-func WaitForReducersToFinish(messageHandler *messages.MessageHandler, waitGroup *sync.WaitGroup, node string) {
+func WaitForReducersToFinish(messageHandler *messages.MessageHandler, waitGroup *sync.WaitGroup, node string, context context) {
 	for {
 		wrapper, _ := messageHandler.Receive()
 
@@ -651,10 +667,11 @@ func WaitForReducersToFinish(messageHandler *messages.MessageHandler, waitGroup 
 		case *messages.Wrapper_MapReduceJobResponseMessage:
 			defer waitGroup.Done()
 			jobId := msg.MapReduceJobResponseMessage.JobId
+			outputFile := msg.MapReduceJobResponseMessage.OutputFile
+			resultSize := msg.MapReduceJobResponseMessage.ResultSize
 			if jobFound := msg.MapReduceJobResponseMessage.JobFound; jobFound {
-				log.Println("Map job complete: " + jobId + " - " + node)
-				log.Println("Saving results to temp file")
-				//append results to temp file
+				log.Println("Map reduce job complete: " + jobId + " - " + node)
+				ReceiveResults(messageHandler, outputFile, int(resultSize))
 			} else {
 				log.Println("No job found on " + node + " for job ID " + jobId)
 			}
@@ -664,6 +681,12 @@ func WaitForReducersToFinish(messageHandler *messages.MessageHandler, waitGroup 
 			continue
 		}
 	}
+}
+
+func SaveResultsToDFS(messageHandler *messages.MessageHandler, fileName string, context context) {
+	wrapper := PackagePutRequest(fileName)
+	messageHandler.Send(wrapper)
+	HandleConnection(messageHandler, context)
 }
 
 func HandleConnections(messageHandler *messages.MessageHandler, waitGroup *sync.WaitGroup, context context, node string) {
@@ -729,9 +752,9 @@ func HandleConnection(messageHandler *messages.MessageHandler, context context) 
 			inputFileExists, chunks, nodes, _, outputFile, jobFile := UnpackComputeResponse(msg)
 			log.Println("job: " + jobFile)
 			if inputFileExists {
-				jobId := InitiateMapPhase(chunks, nodes, jobFile) //returns when map phase is complete
-				InitiateReducePhase(nodes, jobId, jobFile)
-				//save results in dfs
+				jobId := InitiateMapPhase(chunks, nodes, jobFile)
+				InitiateReducePhase(nodes, jobId, jobFile, outputFile, context)
+				SaveResultsToDFS(messageHandler, outputFile, context)
 				log.Println("Sending map reduce results to DFS as " + outputFile)
 			}
 			return

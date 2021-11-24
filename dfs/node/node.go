@@ -333,6 +333,29 @@ func ShuffleResults(resultsFilePath string, jobId string, messageHandler *messag
 	log.Println("Map job complete: " + jobId)
 }
 
+func SendReducedResults(messageHandler *messages.MessageHandler, resultsFilePath string, jobId string, outputFile string) {
+	log.Println("Sending results for " + jobId)
+
+	file, err := os.Open(resultsFilePath)
+	defer file.Close()
+	if err != nil {
+		fmt.Println(err.Error())
+		log.Println(err.Error())
+	}
+
+	f, err := file.Stat()
+	if err != nil {
+		fmt.Println(err.Error())
+		log.Println(err.Error())
+	}
+	fileSize := f.Size()
+	wrapper := PackageMapReduceJobResponse(jobId, true, int(fileSize), outputFile)
+	messageHandler.Send(wrapper)
+	writer := bufio.NewWriter(messageHandler.GetConn())
+	bytes, err := io.CopyN(writer, file, fileSize)
+	log.Println("Sent " + strconv.Itoa(int(bytes)) + " bytes")
+}
+
 func WaitForMapperToFinish(port string) {
 	listener, err := net.Listen("tcp", ":" + port)
 	if err != nil {
@@ -349,6 +372,31 @@ func WaitForMapperToFinish(port string) {
 				case *messages.Wrapper_MapCompleteAckMessage:
 					jobId := msg.MapCompleteAckMessage.JobId
 					log.Println(jobId + ": mapper complete ack received")
+					return
+				default:
+					continue
+				}
+			}
+		}
+	}
+}
+
+func WaitForReducerToFinish(ackPort string) {
+	listener, err := net.Listen("tcp", ":" + ackPort)
+	if err != nil {
+		log.Fatalln(err.Error())
+	}
+	log.Println("Waiting for reduce ack on port " + ackPort)
+	for {
+		if conn, err := listener.Accept(); err == nil {
+			messageHandler := messages.NewMessageHandler(conn)
+
+			for {
+				request, _ := messageHandler.Receive()
+				switch msg := request.Msg.(type) {
+				case *messages.Wrapper_ReducerCompleteAckMessage:
+					jobId := msg.ReducerCompleteAckMessage.JobId
+					log.Println(jobId + ": reducer complete ack received")
 					return
 				default:
 					continue
@@ -465,6 +513,20 @@ func PackageGetResponseChunk(chunkMetadata *messages.ChunkMetadata, fileMetadata
 	return wrapper
 }
 
+func PackageMapReduceJobResponse(jobId string, jobFound bool, fileSize int, outputFile string) *messages.Wrapper {
+	message := &messages.MapReduceJobResponse{
+		JobId:    jobId,
+		JobFound: jobFound,
+		ResultSize: int32(fileSize),
+		OutputFile: outputFile,
+	}
+	wrapper := &messages.Wrapper{
+		Msg: &messages.Wrapper_MapReduceJobResponseMessage{
+			MapReduceJobResponseMessage: message},
+	}
+	return wrapper
+}
+
 func SaveReduceJobInput(messageHandler *messages.MessageHandler, jobId string, inputBytes int, context context) {
 	conn := messageHandler.GetConn()
 	fileName := context.rootDir + "_reduce_inputs_" + jobId + context.listeningPort
@@ -491,10 +553,11 @@ func SaveReduceJobInput(messageHandler *messages.MessageHandler, jobId string, i
 	log.Println("Wrote reduce job input: " + jobId + " - " + strconv.Itoa(int(n)) + " bytes" )
 }
 
-func RunReduceJob(jobId string, jobFileName string, messageHandler *messages.MessageHandler, context context) {
+func RunReduceJob(jobId string, jobFileName string, messageHandler *messages.MessageHandler, context context) string {
 	inputFile := context.rootDir + "_reduce_inputs_" + jobId + context.listeningPort
 	function := "reduce"
-	ackPort := "ackPort"
+	listeningPortAsInt, _:= strconv.Atoi(context.listeningPort)
+	ackPort := strconv.Itoa(listeningPortAsInt + 20)
 	chunkName := "chunkName"
 	resultsFilePath := inputFile
 	file, err := os.Open(inputFile)
@@ -503,7 +566,7 @@ func RunReduceJob(jobId string, jobFileName string, messageHandler *messages.Mes
 		wrapper := PackageMapReduceResponse(jobId, false)
 		messageHandler.Send(wrapper)
 		messageHandler.Close()
-		return
+		return ""
 	}
 	file.Close()
 	log.Println("Running reduce job")
@@ -521,11 +584,9 @@ func RunReduceJob(jobId string, jobFileName string, messageHandler *messages.Mes
 		jobId + " " +
 		context.listeningPort + " " +
 		context.rootDir)
-	//WaitForrToFinish(ackPort)
+	WaitForReducerToFinish(ackPort)
 	log.Println("Reduce job finished")
-	//return resultsFilePath
-	//messageHandler.Send(wrapper)
-	log.Println("Response sent to client--jk")
+	return context.rootDir + "_" + function + "_results_" + jobId + context.listeningPort
 }
 
 func PackageMapReduceResponse(jobId string, found bool) *messages.Wrapper {
@@ -575,10 +636,12 @@ func HandleConnection(conn net.Conn, context context) {
 		case *messages.Wrapper_ReduceJobRequestMessage:
 			jobId := msg.ReduceJobRequestMessage.JobId
 			fileName := msg.ReduceJobRequestMessage.JobFileName
+			outputFile := msg.ReduceJobRequestMessage.OutputFile
 			log.Println("Reduce job request received: " + jobId + " - " + fileName)
+			resultsFilePath := RunReduceJob(jobId, fileName, messageHandler, context)
 			log.Println("Sending response to client")
-			//check if file exists, run reduce job
-			RunReduceJob(jobId, fileName, messageHandler, context)
+			SendReducedResults(messageHandler, resultsFilePath, jobId, outputFile)
+			messageHandler.Close()
 			return
 		case *messages.Wrapper_DeleteRequestMessage:
 			chunkName := msg.DeleteRequestMessage.FileName

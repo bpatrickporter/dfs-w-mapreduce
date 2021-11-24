@@ -146,6 +146,30 @@ func SendMapCompleteAck(ackPort string, jobId string) {
 	messageHandler.Close()
 }
 
+func SendReducerCompleteAck(ackPort string, jobId string) {
+	var conn net.Conn
+	var err error
+	for {
+		if conn, err = net.Dial("tcp", "localhost:" + ackPort); err != nil {
+			log.Println("trying conn again" + " localhost:" + ackPort)
+			time.Sleep(1000 * time.Millisecond)
+		} else {
+			break
+		}
+	}
+	msg := messages.ReducerCompleteAck{
+		JobId: jobId,
+	}
+	wrapper := &messages.Wrapper{
+		Msg: &messages.Wrapper_ReducerCompleteAckMessage{
+			ReducerCompleteAckMessage: &msg,
+		},
+	}
+	messageHandler := messages.NewMessageHandler(conn)
+	messageHandler.Send(wrapper)
+	messageHandler.Close()
+}
+
 func HandleArgs() (string, string, string, string, string, string, string) {
 	function := os.Args[1]
 	ackPort := os.Args[2]
@@ -201,7 +225,6 @@ func main() {
 		writer.Write(results)
 		SendMapCompleteAck(ackPort, jobId)
 	} else if function == "reduce" {
-		//inputFilePath := rootDir + "_" + function + "_inputs_" + jobId + nodeListeningPort
 		outputFilePath := rootDir + "_" + function + "_results_" + jobId + nodeListeningPort
 		file, _ := os.OpenFile(outputFilePath, os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0666)
 		defer file.Close()
@@ -224,6 +247,7 @@ func main() {
 		log.Println("Finished reducing")
 		log.Println("Writing output to disk")
 		writer.Write(outputs)
+		SendReducerCompleteAck(ackPort, jobId)
 	} else {
 		log.Fatalln("job must be map or reduce function")
 	}
