@@ -1,0 +1,10 @@
+Retrospective
+
+1. I continued making commit on Project 2 for 12 days after the due date.
+2. I woudln't have completed the project any differently. I think we were given sufficient freedom in our design choices.
+3. If I were to extend the project I'd make the job completion percentage updates accessable to the client. Currently they're printed 
+to the console of the individual nodes but sending this info to the client would be more useful.
+4. I spent about 12 days working on this project, roughly 30 hours. The part that took the most time was figuring out how to run the debug the jobs. 
+5. I learned how mapreduce jobs work and that it isn't too difficult to implement a basic distributed system capable of running these types of jobs. I 
+wouldn't change anything about this project. 
+6. I worked alone on this project.  
